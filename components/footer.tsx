@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Code, Mail, MapPin, Calendar } from 'lucide-react';
+import { Code, Mail, MapPin, Calendar, PhoneIcon } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -51,15 +51,19 @@ export default function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center text-sm text-muted-foreground">
                 <Calendar className="h-4 w-4 mr-2 text-chart-2" />
-                <span>June 15, 2025 at 7:00 PM</span>
+                <span>July 19, 2025 at 6:30 PM</span>
               </li>
               <li className="flex items-center text-sm text-muted-foreground">
                 <MapPin className="h-4 w-4 mr-2 text-chart-1" />
-                <span>The Tech Hub, 123 Coding Ave, San Francisco</span>
+                <span>Kalatua Garden Restaurant</span>
               </li>
               <li className="flex items-center text-sm text-muted-foreground">
                 <Mail className="h-4 w-4 mr-2 text-chart-4" />
                 <span>clarice@bouwer.dev</span>
+              </li>
+              <li className="flex items-center text-sm text-muted-foreground">
+                <PhoneIcon className="h-4 w-4 mr-2 text-chart-5" />
+                <span className="text-muted-foreground">+230 5455 1651</span>
               </li>
             </ul>
           </div>

@@ -27,9 +27,9 @@ export default function Navbar() {
             <span className="text-primary">clarice</span>
             <span className="text-chart-1">.</span>
             <span className="text-chart-2">is</span>
-            <span className="text-chart-3">(</span>
+            <span className="text-chart-5">(</span>
             <span className="text-chart-4">40</span>
-            <span className="text-chart-3">)</span>
+            <span className="text-chart-5">)</span>
           </span>
         </Link>
 
