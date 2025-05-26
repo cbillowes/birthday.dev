@@ -169,31 +169,6 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
       {errors.guests?.message && (
         <p className="text-sm text-red-600">{errors.guests.message}</p>
       )}
-
-      <h3 className="text-2xl font-bold text-white/90 mb-4">
-        Your booking: {surname}
-      </h3>
-      <table className="w-full text-left border-collapse">
-        <thead>
-          <tr>
-            <th className="px-4 py-2 text-white/70">Name</th>
-            <th className="px-4 py-2 text-white/70">WhatsApp number</th>
-          </tr>
-        </thead>
-        <tbody>
-          {guests.map((guest, index) => (
-            <tr
-              key={`summary-row-${index}`}
-              className="border-b border-white/20"
-            >
-              <td className="px-4 py-2 text-white/90 underline">
-                <a href={`#guest-${index}`}>{guest.name}</a>
-              </td>
-              <td className="px-4 py-2 text-white/90">{guest.phone}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 };
