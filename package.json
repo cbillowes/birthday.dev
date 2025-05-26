@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "firebase:emulators": "firebase emulators:start",
+    "firebase:deploy": "firebase deploy --only firestore"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -49,6 +51,8 @@
     "embla-carousel-react": "^8.3.0",
     "eslint": "8.49.0",
     "eslint-config-next": "13.5.1",
+    "firebase": "^11.8.1",
+    "firebase-admin": "^13.4.0",
     "framer-motion": "^11.2.12",
     "input-otp": "^1.2.4",
     "lucide-react": "^0.446.0",
