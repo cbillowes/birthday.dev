@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useWindowSize } from "react-use";
 import Confetti from "react-confetti";
+import { Button } from "@/components/ui/button";
 import { GuestListType, guestListSchema } from "./schema";
 import GuestList from "./list";
 import { rsvp } from "./service";
@@ -77,18 +79,24 @@ const GuestForm: React.FC = () => {
       {submitted && (
         <div className="text-center p-6 border-white/20 bg-white/10 rounded-lg shadow-sm border border-gray-200 animate-fadeIn">
           <Confetti width={width} height={height} />
+          <Button
+            variant="outline"
+            className="mb-4 bg-white text-chart-1 hover:bg-chart-5 text-gray-900 hover:text-white"
+            asChild
+          >
+            <Link href="/calendar.ics" target="_blank" download="save-the-date-clarice.ics">
+              Add to Calendar
+            </Link>
+          </Button>
           <h2 className="text-lg font-bold mb-4">Thank You Very Much!</h2>
           <p>
             We have received your response and look forward to hosting you at
             this once in a life time event.
           </p>
-          <Image
-            src={tada}
-            alt="Tada"
-            className="mx-auto mb-4"
-            width={100}
-          />
-          <h2 className="text-lg font-bold mb-2 text-left pl-4">Who is joining us?</h2>
+          <Image src={tada} alt="Tada" className="mx-auto mb-4" width={100} />
+          <h2 className="text-lg font-bold mb-2 text-left pl-4">
+            Who is joining us?
+          </h2>
           <table className="w-full text-left border-collapse">
             <thead>
               <tr>
@@ -102,9 +110,7 @@ const GuestForm: React.FC = () => {
                   key={`summary-row-${index}`}
                   className="border-t border-white/20"
                 >
-                  <td className="px-4 py-2 text-white/90">
-                    {guest.name}
-                  </td>
+                  <td className="px-4 py-2 text-white/90">{guest.name}</td>
                   <td className="px-4 py-2 text-white/90">{guest.phone}</td>
                 </tr>
               ))}
