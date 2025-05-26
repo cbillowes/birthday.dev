@@ -79,21 +79,40 @@ const GuestForm: React.FC = () => {
       {submitted && (
         <div className="text-center p-6 border-white/20 bg-white/10 rounded-lg shadow-sm border border-gray-200 animate-fadeIn">
           <Confetti width={width} height={height} />
-          <Button
-            variant="outline"
-            className="mb-4 bg-white text-chart-1 hover:bg-chart-5 text-gray-900 hover:text-white"
-            asChild
-          >
-            <Link href="/calendar.ics" target="_blank" download="save-the-date-clarice.ics">
-              Add to Calendar
-            </Link>
-          </Button>
+          <Image
+            src={tada}
+            alt="Tada"
+            width={100}
+            height={100}
+            className="mx-auto mb-4"
+          />
           <h2 className="text-lg font-bold mb-4">Thank You Very Much!</h2>
           <p>
             We have received your response and look forward to hosting you at
             this once in a life time event.
           </p>
-          <Image src={tada} alt="Tada" className="mx-auto mb-4" width={100} />
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+            <Button
+              variant="outline"
+              className="my-4 bg-white text-chart-1 hover:bg-chart-5 text-gray-900 hover:text-white w-full"
+              asChild
+            >
+              <Link
+                href="/calendar.ics"
+                target="_blank"
+                download="save-the-date-clarice.ics"
+              >
+                Add to Calendar
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              className="my-4 bg-white text-chart-1 hover:bg-chart-5 text-gray-900 hover:text-white w-full"
+              asChild
+            >
+              <Link href="/">Go home</Link>
+            </Button>
+          </div>
           <h2 className="text-lg font-bold mb-2 text-left pl-4">
             Who is joining us?
           </h2>
