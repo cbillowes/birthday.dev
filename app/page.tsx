@@ -17,6 +17,7 @@ import {
 import { motion } from "framer-motion";
 import CountdownTimer from "@/components/countdown-timer";
 import GallerySection from "@/components/gallery-section";
+import unicorn from "@/app/images/unicorn.png";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -47,6 +48,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
+            <Image src={unicorn} alt="Unicorn" width={400} className="mx-auto mb-6" />
             <h1 className="font-fira-code text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
               <span className="text-white">clarice</span>
               <span className="text-chart-1">.</span>
