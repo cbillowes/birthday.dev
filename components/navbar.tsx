@@ -49,7 +49,7 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
-          <Button asChild className="bg-chart-2 hover:bg-chart-2/90 text-white">
+          <Button asChild className="bg-chart-5 hover:bg-chart-2/90 text-white">
             <Link href="/rsvp">RSVP Now</Link>
           </Button>
         </nav>

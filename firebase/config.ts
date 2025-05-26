@@ -1,5 +1,5 @@
-const { initializeApp, cert } = require('firebase-admin/app');
-const { getFirestore } = require('firebase-admin/firestore');
+import { initializeApp, cert } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
 
 if (!process.env.FIREBASE_SERVICE_ACCOUNT) {
   throw new Error('FIREBASE_SERVICE_ACCOUNT environment variable is not set');
@@ -16,8 +16,4 @@ initializeApp({
   }),
 });
 
-const db = getFirestore();
-
-module.exports = {
-  db,
-};
+export const db = getFirestore();
