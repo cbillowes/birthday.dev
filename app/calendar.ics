@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Clarice’s 40th Birthday//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+SUMMARY:Clarice’s 40th Birthday Celebration
+DTSTART:20250615T190000
+DTEND:20250616T000000
+DTSTAMP:20240601T120000Z
+UID:clarice@bouwer.dev
+LOCATION:The Tech Hub, 123 Coding Ave, San Francisco, CA
+DESCRIPTION:Join us for a night of celebration as we compile four decades of memories and initialize the next chapter of Clarice’s journey.
+END:VEVENT
+END:VCALENDAR
