@@ -61,7 +61,10 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
             key={`guest-${index}`}
             className="p-6 border-white/20 bg-white/10 rounded-lg shadow-sm border border-gray-200 animate-fadeIn"
           >
-            <div id={`guest-${index}`} className="flex justify-between items-center mb-4">
+            <div
+              id={`guest-${index}`}
+              className="flex justify-between items-center mb-4"
+            >
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -157,7 +160,7 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
       <button
         type="button"
         onClick={addGuest}
-        className="flex items-center justify-center w-full py-3 px-4 rounded-md text-white font-medium text-gray-800 rounded-md hover:bg-pink-600 hover:text-pink-50 transition-colors border-white bg-white"
+        className="flex items-center justify-center w-full py-3 px-4 rounded-md font-medium text-gray-800 rounded-md hover:bg-pink-600 hover:text-pink-50 transition-colors border-white bg-white"
       >
         <Plus size={18} className="mr-2" />
         Add another guest
@@ -168,7 +171,7 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
       )}
 
       <h3 className="text-2xl font-bold text-white/90 mb-4">
-        Summary: {surname}
+        Your booking: {surname}
       </h3>
       <table className="w-full text-left border-collapse">
         <thead>
@@ -183,7 +186,9 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
               key={`summary-row-${index}`}
               className="border-b border-white/20"
             >
-              <td className="px-4 py-2 text-white/90 underline"><a href={`#guest-${index}`}>{guest.name}</a></td>
+              <td className="px-4 py-2 text-white/90 underline">
+                <a href={`#guest-${index}`}>{guest.name}</a>
+              </td>
               <td className="px-4 py-2 text-white/90">{guest.phone}</td>
             </tr>
           ))}
