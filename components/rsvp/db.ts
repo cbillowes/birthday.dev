@@ -4,17 +4,19 @@ import { db } from "@/firebase/config";
 
 export const saveRsvp = async ({ guests, surname }: GuestListType) => {
   const ref = uuidv7();
-  return guests.map(async (guest) => {
-    const id = uuidv7();
-    return await db
-      .collection("guests")
-      .doc(id)
-      .set({
-        id: uuidv7(),
-        booking: surname,
-        ref,
-        ...guest,
-        createdAt: new Date(),
-      });
-  });
+  await Promise.all(
+    guests.map(async (guest) => {
+      const id = uuidv7();
+      await db
+        .collection("guests")
+        .doc(id)
+        .set({
+          id,
+          booking: surname,
+          ref,
+          ...guest,
+          createdAt: new Date(),
+        });
+    })
+  );
 };
