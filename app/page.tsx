@@ -124,6 +124,7 @@ export default function Home() {
                     <Link
                       href="/calendar.ics"
                       download="save-the-date-clarice.ics"
+                      target="_blank"
                     >
                       Add to Calendar
                     </Link>
