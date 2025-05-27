@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <body
-        className={`${roboto.variable} ${firaCode.variable} font-thin font-sans bg-background text-foreground`}
+        className={`${roboto.variable} ${firaCode.variable} font-light font-sans bg-background text-foreground`}
       >
         <ThemeProvider
           attribute="class"

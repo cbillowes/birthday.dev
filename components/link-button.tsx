@@ -9,7 +9,6 @@ export const PrimaryLinkButton = ({
   size?: "default" | "sm" | "lg";
   to: string;
   children: React.ReactNode;
-  className?: string;
 }) => {
   return (
     <Button
@@ -26,20 +25,32 @@ export const GhostLinkButton = ({
   size = "default",
   to,
   children,
+  className = "border-white text-white hover:bg-white/10 bg-transparent",
+  target,
+  as,
 }: {
   size?: "default" | "sm" | "lg";
   to: string;
   children: React.ReactNode;
   className?: string;
+  target?: string;
+  as?: string;
 }) => {
   return (
     <Button
       asChild
       variant="outline"
       size={size}
-      className="font-normal w-full border-white text-white hover:bg-chart-4/10"
+      className={`font-normal w-full ${className}`}
     >
-      <Link href={to}>{children}</Link>
+      <Link
+        href={to}
+        target={target}
+        download={as}
+        rel={target === "_blank" ? "noopener noreferrer" : ""}
+      >
+        {children}
+      </Link>
     </Button>
   );
 };

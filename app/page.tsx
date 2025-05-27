@@ -50,9 +50,9 @@ export default function Home() {
               width={400}
               className="mx-auto mb-6"
             />
-            <Banner />
+            <Banner size="lg" />
 
-            <p className="max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 mb-8">
+            <p className="mt-5 max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 mb-8 font-thin">
               Join us for a night of celebration as we compile four decades of
               memories and initialize the next chapter of Clarice’s journey.
             </p>
@@ -101,19 +101,15 @@ export default function Home() {
                     Saturday, July 19, 2025
                   </p>
                   <p className="text-muted-foreground">6:30 PM - Midnight</p>
-                  <Button
-                    variant="outline"
+                  <GhostLinkButton
+                    to="/calendar.ics"
+                    size="lg"
                     className="mt-4 border-chart-1 text-chart-1 hover:bg-chart-1/10"
-                    asChild
+                    as="save-the-date-clarice.ics"
+                    target="_blank"
                   >
-                    <Link
-                      href="/calendar.ics"
-                      download="save-the-date-clarice.ics"
-                      target="_blank"
-                    >
-                      Add to Calendar
-                    </Link>
-                  </Button>
+                    Add to Calendar
+                  </GhostLinkButton>
                 </div>
               </CardContent>
             </Card>
@@ -132,32 +128,22 @@ export default function Home() {
                     Twenty-Foot Rd, Pereybere, Mauritius
                   </p>
                   <div className="flex items-center justify-center gap-4">
-                    <Button
-                      variant="outline"
+                    <GhostLinkButton
+                      to="https://maps.google.com"
+                      size="lg"
                       className="mt-4 border-chart-2 text-chart-2 hover:bg-chart-2/10"
-                      asChild
+                      target="_blank"
                     >
-                      <a
-                        href="https://maps.google.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        View Map
-                      </a>
-                    </Button>
-                    <Button
-                      variant="outline"
+                      View Map
+                    </GhostLinkButton>
+                    <GhostLinkButton
+                      to="https://www.google.com/maps?rlz=1C5CHFA_enMU1093MU1093&gs_lcrp=EgZjaHJvbWUqDggAEEUYJxg7GIAEGIoFMg4IABBFGCcYOxiABBiKBTIGCAEQRRhAMgYIAhBFGDkyEAgDEAAYkQIYsQMYgAQYigUyDQgEEAAYkQIYgAQYigUyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMDM0ajBqMagCALACAA&um=1&ie=UTF-8&fb=1&gl=mu&sa=X&geocode=KcEzzdrQq30hMfEazFrUBR_x&daddr=MU,+Twenty-Foot+Rd,+Pereybere+30546"
+                      size="lg"
                       className="mt-4 border-chart-2 text-chart-2 hover:bg-chart-2/10"
-                      asChild
+                      target="_blank"
                     >
-                      <a
-                        href="https://www.google.com/maps?rlz=1C5CHFA_enMU1093MU1093&gs_lcrp=EgZjaHJvbWUqDggAEEUYJxg7GIAEGIoFMg4IABBFGCcYOxiABBiKBTIGCAEQRRhAMgYIAhBFGDkyEAgDEAAYkQIYsQMYgAQYigUyDQgEEAAYkQIYgAQYigUyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMDM0ajBqMagCALACAA&um=1&ie=UTF-8&fb=1&gl=mu&sa=X&geocode=KcEzzdrQq30hMfEazFrUBR_x&daddr=MU,+Twenty-Foot+Rd,+Pereybere+30546"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Get Directions
-                      </a>
-                    </Button>
+                      Get Directions
+                    </GhostLinkButton>
                   </div>
                 </div>
               </CardContent>

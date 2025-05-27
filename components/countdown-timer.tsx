@@ -62,12 +62,12 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
 
 function TimeCard({ label, value }: { label: string; value: number }) {
   return (
-    <Card className="bg-card/30 backdrop-blur-lg border-border/50 w-20 md:w-24 p-3 flex flex-col items-center">
+    <Card className="bg-card/30 backdrop-blur-lg border-border/80 w-20 md:w-24 p-3 flex flex-col items-center">
       <motion.div
         key={value}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="font-mono text-2xl md:text-3xl font-bold text-chart-2"
+        className="font-mono text-2xl md:text-3xl font-bold text-chart-5"
       >
         {value.toString().padStart(2, '0')}
       </motion.div>
