@@ -63,11 +63,11 @@ export default function Home() {
               memories and initialize the next chapter of Clarice’s journey.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
               <Button
                 asChild
                 size="lg"
-                className="bg-chart-5 hover:bg-chart-5/90 text-white"
+                className="w-full bg-chart-5 hover:bg-chart-5/90 text-white"
               >
                 <Link href="/rsvp">RSVP Now</Link>
               </Button>
@@ -75,7 +75,7 @@ export default function Home() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-chart-4/10"
+                className="w-full border-white text-white hover:bg-chart-4/10"
               >
                 <Link href="#details">View Details</Link>
               </Button>
