@@ -1,17 +1,18 @@
-"use client"
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Code, Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { useState } from 'react';
-import { cn } from '@/lib/utils';
-import { motion, AnimatePresence } from 'framer-motion';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { motion, AnimatePresence } from "framer-motion";
+import { Banner } from "@/components/banner";
 
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/rsvp', label: 'RSVP' },
-  { href: '/manage', label: 'Manage Booking' },
+  { href: "/", label: "Home" },
+  { href: "/rsvp", label: "RSVP" },
+  { href: "/manage", label: "Manage Booking" },
 ];
 
 export default function Navbar() {
@@ -21,17 +22,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-lg bg-background/80 border-b border-border/40">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <Code className="h-6 w-6 text-primary" />
-          <span className="font-fira-code font-bold text-xl">
-            <span className="text-primary">clarice</span>
-            <span className="text-chart-1">.</span>
-            <span className="text-chart-2">is</span>
-            <span className="text-chart-5">(</span>
-            <span className="text-chart-4">40</span>
-            <span className="text-chart-5">)</span>
-          </span>
-        </Link>
+        <Banner showCode to="/" size="sm" />
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
@@ -74,7 +65,7 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="md:hidden"

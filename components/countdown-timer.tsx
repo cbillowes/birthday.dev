@@ -26,7 +26,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   useEffect(() => {
     const calculateTimeLeft = () => {
       const difference = +new Date(targetDate) - +new Date();
-      
+
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -67,7 +67,7 @@ function TimeCard({ label, value }: { label: string; value: number }) {
         key={value}
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="font-fira-code text-2xl md:text-3xl font-bold text-chart-2"
+        className="font-mono text-2xl md:text-3xl font-bold text-chart-2"
       >
         {value.toString().padStart(2, '0')}
       </motion.div>

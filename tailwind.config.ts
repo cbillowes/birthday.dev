@@ -17,8 +17,8 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-roboto)'],
-        'fira-code': ['var(--font-fira-code)'],
+        sans: ['var(--font-roboto), "sans-serif"'],
+        mono: ['var(--font-fira-code)'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

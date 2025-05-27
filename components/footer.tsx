@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Code, Mail, MapPin, Calendar, PhoneIcon } from 'lucide-react';
+import { Mail, MapPin, Calendar, PhoneIcon } from 'lucide-react';
+import { Banner } from '@/components/banner';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -10,18 +11,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-3">
             <div className="flex items-center space-x-2">
-              <Code className="h-5 w-5 text-primary" />
-              <span className="font-fira-code font-bold text-lg">
-                <span className="text-primary">clarice</span>
-                <span className="text-chart-1">.</span>
-                <span className="text-chart-2">is</span>
-                <span className="text-chart-3">(</span>
-                <span className="text-chart-4">40</span>
-                <span className="text-chart-3">)</span>
-              </span>
+              <Banner showCode size="sm" />
             </div>
             <p className="text-sm text-muted-foreground">
-              A celebration of four decades of awesomeness
+              A celebration of four decades of awesomeness.
             </p>
           </div>
 
@@ -74,7 +67,7 @@ export default function Footer() {
             © {currentYear} Clarice’s 40th. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground mt-2 md:mt-0">
-            <span className="font-fira-code">// made with 💻 and 💖</span>
+            <span className="font-mono">{"//"} made with 💻 and 💖</span>
           </p>
         </div>
       </div>

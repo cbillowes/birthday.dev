@@ -1,13 +1,28 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { ThemeProvider } from '@/components/theme-provider';
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
-import {roboto, firaCode } from "@/app/fonts";
+import "./globals.css";
+import type { Metadata } from "next";
+import { Roboto, Fira_Code } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+
+const roboto = Roboto({
+  weight: ["100", "300", "400", "500", "700", "900"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-roboto",
+  display: "swap",
+});
+
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  variable: "--font-fira-code",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: 'Clarice’s 40th Birthday Celebration',
-  description: 'Join us to celebrate Clarice’s 40th birthday - a night of code, cocktails and celebration!',
+  title: "Clarice’s 40th Birthday Celebration",
+  description:
+    "Join us to celebrate Clarice’s 40th birthday - a night of code, cocktails and celebration!",
 };
 
 export default function RootLayout({
@@ -17,7 +32,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
-      <body className={`${roboto.variable} ${firaCode.variable} font-sans bg-background text-foreground`}>
+      <body
+        className={`${roboto.variable} ${firaCode.variable} font-thin font-sans bg-background text-foreground`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

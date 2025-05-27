@@ -18,6 +18,8 @@ import { motion } from "framer-motion";
 import CountdownTimer from "@/components/countdown-timer";
 import GallerySection from "@/components/gallery-section";
 import unicorn from "@/app/images/unicorn.png";
+import { GhostLinkButton, PrimaryLinkButton } from "@/components/link-button";
+import { Banner } from "@/components/banner";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -35,12 +37,6 @@ export default function Home() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-[90vh] flex items-center justify-center">
-        <div className="absolute inset-0 z-0">
-          <div className="h-full w-full bg-cover bg-center">
-            <div className="h-full w-full bg-black/70"></div>
-          </div>
-        </div>
-
         <div className="container relative z-10 px-4 py-16 sm:px-6 sm:py-24 lg:py-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -48,15 +44,13 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <Image src={unicorn} alt="Unicorn" width={400} className="mx-auto mb-6" />
-            <h1 className="font-fira-code text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-              <span className="text-white">clarice</span>
-              <span className="text-chart-1">.</span>
-              <span className="text-chart-2">is</span>
-              <span className="text-chart-5">(</span>
-              <span className="text-chart-4">40</span>
-              <span className="text-chart-5">)</span>
-            </h1>
+            <Image
+              src={unicorn}
+              alt="Unicorn"
+              width={400}
+              className="mx-auto mb-6"
+            />
+            <Banner />
 
             <p className="max-w-2xl mx-auto text-lg sm:text-xl text-gray-300 mb-8">
               Join us for a night of celebration as we compile four decades of
@@ -64,21 +58,12 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-              <Button
-                asChild
-                size="lg"
-                className="w-full bg-chart-5 hover:bg-chart-5/90 text-white"
-              >
-                <Link href="/rsvp">RSVP Now</Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="w-full border-white text-white hover:bg-chart-4/10"
-              >
-                <Link href="#details">View Details</Link>
-              </Button>
+              <PrimaryLinkButton size="lg" to="/rsvp">
+                RSVP Now
+              </PrimaryLinkButton>
+              <GhostLinkButton size="lg" to="#details">
+                View Details
+              </GhostLinkButton>
             </div>
 
             <div className="mt-12">
@@ -185,7 +170,10 @@ export default function Home() {
                     <PartyPopper className="h-8 w-8 text-chart-4" />
                   </div>
                   <h3 className="text-xl font-bold mb-2">Dress Code</h3>
-                  <p className="text-muted-foreground">Wear whatever makes you comfortable and is socially acceptable.</p>
+                  <p className="text-muted-foreground">
+                    Wear whatever makes you comfortable and is socially
+                    acceptable.
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -227,7 +215,7 @@ export default function Home() {
                 <CardContent className="pt-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div>
-                      <h3 className="text-xl font-bold mb-4 font-fira-code">
+                      <h3 className="text-xl font-bold mb-4 font-mono">
                         <Code /> About the Celebration
                       </h3>
                       <p className="text-muted-foreground mb-4">
@@ -267,7 +255,7 @@ export default function Home() {
             <TabsContent value="gifts" className="mt-6">
               <Card className="border-border/50">
                 <CardContent className="pt-6">
-                  <h3 className="text-xl font-bold mb-4 font-fira-code">
+                  <h3 className="text-xl font-bold mb-4 font-mono">
                     <Code /> Gift Registry
                   </h3>
                   <p className="text-muted-foreground mb-4">
@@ -310,7 +298,7 @@ export default function Home() {
             <TabsContent value="faq" className="mt-6">
               <Card className="border-border/50">
                 <CardContent className="pt-6">
-                  <h3 className="text-xl font-bold mb-4 font-fira-code">
+                  <h3 className="text-xl font-bold mb-4 font-mono">
                     <Code /> Frequently Asked Questions
                   </h3>
                   <div className="space-y-6">
@@ -370,7 +358,8 @@ export default function Home() {
             className="text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-2">
-              <Code className="h-6 w-6 text-primary" /> Ready to Join the Celebration?
+              <Code className="h-6 w-6 text-primary" /> Ready to Join the
+              Celebration?
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               Don’t miss this special celebration! Let us know if you’ll be
