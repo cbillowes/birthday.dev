@@ -23,7 +23,6 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
     setValue,
   } = form;
   const guests = watch("guests") || [];
-  const surname = watch("surname");
 
   const addGuest = () => {
     setValue("guests", [
