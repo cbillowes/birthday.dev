@@ -1,19 +1,9 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Fira_Code } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
-
-const firaCode = Fira_Code({
-  subsets: ['latin'],
-  variable: '--font-fira-code',
-});
+import {roboto, firaCode } from "@/app/fonts";
 
 export const metadata: Metadata = {
   title: 'Clarice’s 40th Birthday Celebration',
@@ -27,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
-      <body className={`${inter.variable} ${firaCode.variable} font-sans bg-background text-foreground`}>
+      <body className={`${roboto.variable} ${firaCode.variable} font-sans bg-background text-foreground`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
