@@ -17,7 +17,7 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
+        sans: ['var(--font-roboto)'],
         'fira-code': ['var(--font-fira-code)'],
       },
       backgroundImage: {
