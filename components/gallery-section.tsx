@@ -556,7 +556,18 @@ export default function GallerySection() {
                   <DialogTrigger asChild>
                     <Card
                       className="overflow-hidden cursor-pointer group"
-                      onClick={() => setSelectedPhoto(photo)}
+                      onClick={() =>
+                        setSelectedPhoto({
+                          index,
+                          id: photo.id,
+                          title: photo.title,
+                          description: photo.description,
+                          image:
+                            typeof photo.image === "string"
+                              ? photo.image
+                              : photo.image.src,
+                        })
+                      }
                     >
                       <div className="relative h-64 w-full">
                         <Image
