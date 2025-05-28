@@ -100,7 +100,7 @@ export default function Home() {
                   <p className="text-muted-foreground mb-2">
                     Saturday, July 19, 2025
                   </p>
-                  <p className="text-muted-foreground">6:30 PM - Midnight</p>
+                  <p className="text-muted-foreground">4:30 PM to late</p>
                   <GhostLinkButton
                     to="/calendar.ics"
                     size="lg"
