@@ -598,8 +598,18 @@ export default function GallerySection() {
                         </div>
                         <div
                           onClick={() => {
-                            const previous = selectedPhoto.index - 1;
-                            setSelectedPhoto(photos[previous]);
+                            const previous = photos[selectedPhoto.index - 1];
+                            const previousPhoto = {
+                              index,
+                              id: previous.id,
+                              title: previous.title,
+                              description: previous.description,
+                              image:
+                                typeof previous.image === "string"
+                                  ? previous.image
+                                  : previous.image.src,
+                            };
+                            setSelectedPhoto(previousPhoto);
                           }}
                           className="absolute cursor-pointer top-1/2 left-0 -translate-y-1/2 border-black/60 p-3 bg-black/60 hover:bg-black/70 text-white rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
                         >
@@ -608,8 +618,18 @@ export default function GallerySection() {
                         </div>
                         <div
                           onClick={() => {
-                            const next = selectedPhoto.index + 1;
-                            setSelectedPhoto(photos[next]);
+                            const next = photos[selectedPhoto.index - 1];
+                            const nextPhoto = {
+                              index,
+                              id: next.id,
+                              title: next.title,
+                              description: next.description,
+                              image:
+                                typeof next.image === "string"
+                                  ? next.image
+                                  : next.image.src,
+                            };
+                            setSelectedPhoto(nextPhoto);
                           }}
                           className="absolute cursor-pointer top-1/2 right-0 -translate-y-1/2 border-black/60 p-3 bg-black/60 hover:bg-black/70 text-white rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
                         >
