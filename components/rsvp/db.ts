@@ -2,7 +2,7 @@ import { uuidv7 } from "uuidv7";
 import { GuestListType } from "./schema";
 import { db } from "@/firebase/config";
 
-export const saveRsvp = async ({ guests, surname }: GuestListType) => {
+export const saveRsvp = async ({ guests, bookingName }: GuestListType) => {
   const ref = uuidv7();
   await Promise.all(
     guests.map(async (guest) => {
@@ -12,7 +12,7 @@ export const saveRsvp = async ({ guests, surname }: GuestListType) => {
         .doc(id)
         .set({
           id,
-          booking: surname,
+          bookingName,
           ref,
           ...guest,
           createdAt: new Date(),

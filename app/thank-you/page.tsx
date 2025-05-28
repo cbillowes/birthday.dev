@@ -37,7 +37,7 @@ export default function RsvpPage() {
         <h1 className="text-3xl md:text-4xl font-bold mb-4">Thank You!</h1>
         <p className="max-w-2xl mx-auto">
           We have received your response under{" "}
-          <strong className="font-bold">{rsvp?.surname}</strong> and look
+          <strong className="font-bold">{rsvp?.bookingName}</strong> and look
           forward to hosting you at this once in a life time event.
         </p>
       </motion.div>

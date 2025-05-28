@@ -11,9 +11,6 @@ const GuestForm: React.FC = () => {
 
   const form = useForm<GuestListType>({
     resolver: zodResolver(guestListSchema),
-    defaultValues: {
-      guests: [{ name: "", email: "", phone: "", requests: "" }],
-    },
   });
 
   const {
