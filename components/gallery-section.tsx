@@ -17,6 +17,7 @@ import len from "@/app/images/archive_len.webp";
 import lunch from "@/app/images/archive_lunch.webp";
 import bouwers from "@/app/images/archive_bouwers.webp";
 import marais from "@/app/images/archive_marais.webp";
+import jillian from "@/app/images/archive_jillian.webp";
 import brighteyes from "@/app/images/archive_brighteyes.webp";
 import marcel from "@/app/images/archive_marcel.webp";
 import cake from "@/app/images/archive_cake.webp";
@@ -70,6 +71,7 @@ import workSleep from "@/app/images/archive_work_sleep.webp";
 import zilwa from "@/app/images/archive_zilwa.webp";
 import guinness from "@/app/images/archive_guinness.webp";
 import hands from "@/app/images/archive_hands.webp";
+import newYears from "@/app/images/archive_new_years.webp";
 import type { StaticImageData } from "next/image";
 
 type Photo = {
@@ -320,6 +322,13 @@ const photos = [
     image: marais,
   },
   {
+    id: "jillian",
+    title: "Jillian",
+    description:
+      "Always great to hang out with Jillian, this time on new year's eve at Moods, Mauritius.",
+    image: jillian,
+  },
+  {
     id: "kirstin",
     title: "Kirstin",
     description:
@@ -415,6 +424,13 @@ const photos = [
     description:
       "I did a Neuro-Linguistic Programming course with Sedrick and amazing people. I actually got a certificate.",
     image: nlp,
+  },
+  {
+    id: "newYears",
+    title: "New Year's Eve",
+    description:
+      "New Year's Eve with friends in Mauritius at Moods, Grand Baie, Mauritius.",
+    image: newYears,
   },
   {
     id: "diving",
