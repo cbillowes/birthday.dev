@@ -513,13 +513,12 @@ const photos = [
 ] as Photo[];
 
 export default function GallerySection() {
-  const [selectedPhoto, setSelectedPhoto] = useState<{
-    index: number;
-    id: string;
-    title: string;
-    description: string;
-    image: string;
-  } | null>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
+
+  // assign an index to each photo for navigation
+  photos.forEach((photo, index) => {
+    photo.index = index;
+  });
 
   return (
     <section className="py-16 bg-muted/30">
@@ -543,7 +542,6 @@ export default function GallerySection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {photos.map((photo, index) => {
-            photo.index = index;
             return (
               <motion.div
                 key={photo.id}
@@ -578,60 +576,45 @@ export default function GallerySection() {
                         />
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                         <div className="absolute bg-black/80 text-white first-letter:uppercase bottom-0 left-0 right-0 px-4 py-2 text-sm">
-                          <h3 className="font-normal">{photo.title}</h3>
+                          <h3 className="font-normal">#{index + 1}: {photo.title}</h3>
                         </div>
                       </div>
                     </Card>
                   </DialogTrigger>
                   {selectedPhoto && (
                     <DialogContent className="max-w-3xl p-0 bg-transparent border-none">
-                      <div className="relative w-[800px] h-[450px]">
+                      <div className="relative max-w-[800px] md:h-[450px] w-full h-[250px]">
                         <Image
                           src={selectedPhoto.image}
                           alt={selectedPhoto.title}
                           fill
+                          className="object-cover transition-transform duration-500"
                         />
                         <div className="absolute bg-black/80 text-white first-letter:uppercase bottom-0 left-0 right-0 px-4 py-2 text-sm">
                           <h3 className="font-normal">
-                            {selectedPhoto.description}
+                            #{index + 1}: {selectedPhoto.description}
                           </h3>
                         </div>
                         <div
                           onClick={() => {
-                            const previous = photos[selectedPhoto.index - 1];
-                            const previousPhoto = {
-                              index,
-                              id: previous.id,
-                              title: previous.title,
-                              description: previous.description,
-                              image:
-                                typeof previous.image === "string"
-                                  ? previous.image
-                                  : previous.image.src,
-                            };
-                            setSelectedPhoto(previousPhoto);
+                            const i = selectedPhoto?.index || 0;
+                            let previous = photos[i - 1];
+                            if (!previous) previous = photos[photos.length - 1];
+                            setSelectedPhoto(previous);
                           }}
-                          className="absolute cursor-pointer top-1/2 left-0 -translate-y-1/2 border-black/60 p-3 bg-black/60 hover:bg-black/70 text-white rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+                          className="absolute cursor-pointer top-1/2 left-0 -translate-y-1/2 border-black/60 p-3 bg-black/90 hover:bg-black/70 text-white rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
                         >
                           <ArrowBigLeft className="h-4 w-4" />
                           <span className="sr-only">Previous</span>
                         </div>
                         <div
                           onClick={() => {
-                            const next = photos[selectedPhoto.index - 1];
-                            const nextPhoto = {
-                              index,
-                              id: next.id,
-                              title: next.title,
-                              description: next.description,
-                              image:
-                                typeof next.image === "string"
-                                  ? next.image
-                                  : next.image.src,
-                            };
-                            setSelectedPhoto(nextPhoto);
+                            const i = selectedPhoto?.index || 0;
+                            let next = photos[i + 1];
+                            if (!next) next = photos[0];
+                            setSelectedPhoto(next);
                           }}
-                          className="absolute cursor-pointer top-1/2 right-0 -translate-y-1/2 border-black/60 p-3 bg-black/60 hover:bg-black/70 text-white rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+                          className="absolute cursor-pointer top-1/2 right-0 -translate-y-1/2 border-black/60 p-3 bg-black/90 hover:bg-black/70 text-white rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
                         >
                           <ArrowBigRight className="h-4 w-4" />
                           <span className="sr-only">Next</span>
