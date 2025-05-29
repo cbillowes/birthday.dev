@@ -58,7 +58,7 @@ const GuestForm: React.FC = () => {
                 ></path>
               </svg>
             )}
-            {isSubmitting ? "Submitting..." : "Submit Guests"}
+            {isSubmitting ? "Saving..." : "Save your booking"}
           </button>
         </div>
       </form>
