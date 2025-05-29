@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     "Join us for a night of celebration as we compile four decades of memories and initialize the next chapter of Clarice’s journey.",
   metadataBase: new URL("https://rsvp.clarice.bouwer.dev"),
   openGraph: {
-    images: ["/og-image.png"],
+    images: ["/og-image.webp"],
     type: "website",
   },
 };
