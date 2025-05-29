@@ -11,6 +11,7 @@ import { Banner } from "@/components/banner";
 
 const navItems = [
   { href: "/", label: "Home" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/rsvp", label: "RSVP" },
   { href: "/manage", label: "Manage Booking" },
 ];
