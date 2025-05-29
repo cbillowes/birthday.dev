@@ -1,4 +1,6 @@
-# example netlify.toml
+[dev]
+  command = "next dev"
+  targetPort = 3001
 [build]
   command = "npm run build"
   functions = "functions"
