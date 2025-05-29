@@ -2,7 +2,6 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Roboto, Fira_Code } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { analytics } from "@/lib/firebase"; // required to initialize Firebase Analytics
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 

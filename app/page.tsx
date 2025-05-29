@@ -20,6 +20,7 @@ import GallerySection from "@/components/gallery-section";
 import unicorn from "@/app/images/unicorn.png";
 import { GhostLinkButton, PrimaryLinkButton } from "@/components/link-button";
 import { Banner } from "@/components/banner";
+import { analytics } from "@/lib/firebase"; // required to initialize Firebase Analytics
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -27,6 +28,7 @@ export default function Home() {
   // Ensure hydration mismatch is avoided
   useEffect(() => {
     setMounted(true);
+    analytics;
   }, []);
 
   if (!mounted) {
