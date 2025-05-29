@@ -8,7 +8,7 @@ import { rsvp } from "./service";
 
 const GuestForm: React.FC = () => {
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
-  const router = useRouter()
+  const router = useRouter();
 
   const form = useForm<GuestListType>({
     resolver: zodResolver(guestListSchema),
@@ -20,15 +20,13 @@ const GuestForm: React.FC = () => {
   } = form;
 
   const onSubmit = async (data: GuestListType) => {
-    try {
-      const saved = await rsvp(data);
-      if (saved) {
-        sessionStorage.setItem("rsvp", JSON.stringify(form.getValues()));
-        router.push("/thank-you");
-      }
-    } catch (error) {
+    const saved = await rsvp(data);
+    if (saved) {
+      sessionStorage.setItem("rsvp", JSON.stringify(form.getValues()));
+      router.push("/thank-you");
+    } else {
       setErrorMessage(
-        "There was an error saving your RSVP. Please try again later."
+        "Your booking could not be saved. Please try again later."
       );
     }
   };
