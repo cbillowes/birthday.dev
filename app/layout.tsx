@@ -11,6 +11,9 @@ const roboto = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto",
   display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+  preload: true,
+  adjustFontFallback: true,
 });
 
 const firaCode = Fira_Code({
