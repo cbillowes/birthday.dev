@@ -555,16 +555,7 @@ export default function GallerySection() {
                     <Card
                       className="overflow-hidden cursor-pointer group"
                       onClick={() =>
-                        setSelectedPhoto({
-                          index,
-                          id: photo.id,
-                          title: photo.title,
-                          description: photo.description,
-                          image:
-                            typeof photo.image === "string"
-                              ? photo.image
-                              : photo.image.src,
-                        })
+                        setSelectedPhoto(photo)
                       }
                     >
                       <div className="relative h-64 w-full">
