@@ -13,12 +13,20 @@ const firebaseConfig = {
 
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
 
-let analytics: ReturnType<typeof getAnalytics> | undefined;
+let analytics: ReturnType<typeof getAnalytics> | undefined = undefined;
 
+// Only init analytics if running in the browser
 if (typeof window !== "undefined") {
-  isSupported().then((yes) => {
-    if (yes) {
-      analytics = getAnalytics(app);
+  isSupported().then((supported) => {
+    if (supported) {
+      try {
+        analytics = getAnalytics(app);
+        console.log("✅ Analytics loaded");
+      } catch (e) {
+        console.warn("❌ Analytics failed to load:", e);
+      }
+    } else {
+      console.warn("Analytics not supported in this browser.");
     }
   });
 }
