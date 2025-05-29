@@ -51,6 +51,7 @@ export default function Home() {
               alt="Unicorn"
               width={400}
               className="mx-auto mb-6"
+              priority
             />
             <Banner size="lg" />
 
@@ -304,7 +305,7 @@ export default function Home() {
                         Can I bring a plus one?
                       </h4>
                       <p className="text-muted-foreground">
-                        Yes, you're welcome to bring a guest. Please make sure
+                        Yes, you’re welcome to bring a guest. Please make sure
                         to include them in your RSVP.
                       </p>
                     </div>
@@ -321,7 +322,7 @@ export default function Home() {
                       </h4>
                       <p className="text-muted-foreground">
                         Please note any dietary restrictions in your RSVP, and
-                        we'll do our best to accommodate them.
+                        we’ll do our best to accommodate them.
                       </p>
                     </div>
                   </div>
@@ -333,7 +334,27 @@ export default function Home() {
       </section>
 
       {/* Gallery Section */}
-      <GallerySection />
+      <section className="py-16 bg-muted/30">
+        <div className="container px-4 sm:px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Memories Through The Years
+            </h2>
+            <div className="w-20 h-1 bg-chart-3 mx-auto mb-6"></div>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Celebrating four decades of amazing moments, projects, and
+              friendships.
+            </p>
+          </motion.div>
+          <GallerySection />
+        </div>
+      </section>
 
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-b from-background to-muted/30">
