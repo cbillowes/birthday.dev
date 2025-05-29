@@ -5,7 +5,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { analytics } from "@/lib/firebase"; // required to initialize Firebase Analytics
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { useEffect } from "react";
 
 const roboto = Roboto({
   weight: ["100", "300", "400", "500", "700", "900"],
@@ -26,10 +25,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  useEffect(() => {
-    // Analytics is already initialised in lib/firebase
-    // You can track custom events here if needed
-  }, []);
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <body
