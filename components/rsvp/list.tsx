@@ -55,6 +55,7 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
           <div>
             <label htmlFor="booking-name" className="block text-white/90 mb-1">
               <button
+                type="button"
                 className="mr-2"
                 onClick={() => setShowBookingInfo(!showBookingInfo)}
               >
@@ -82,6 +83,7 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
           <div>
             <div className="text-white/90 mb-1 font-semibold">
               <button
+                type="button"
                 className="mr-2"
                 onClick={() => setShowGuestInfo(!showGuestInfo)}
               >
@@ -102,6 +104,9 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
                 limited space. Bookings are not automatically confirmed. I will
                 be in touch with you to confirm your booking.
               </p>
+            )}
+            {errors.guests?.root?.message && (
+              <ErrorMessage>{errors.guests.root.message}</ErrorMessage>
             )}
           </div>
           {guests.map((_, index) => (

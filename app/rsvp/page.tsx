@@ -13,7 +13,9 @@ export default function RsvpPage() {
         transition={{ duration: 0.6 }}
         className="mb-4 text-center"
       >
-        <h1 className="text-3xl md:text-4xl font-bold mb-4">RSVP</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
+          RSVP
+        </h1>
         <p className="max-w-2xl mx-auto">
           We are thrilled to host you! As mentioned in your invite, you can RSVP
           for your family, partner or friend in one go. Please let us know who

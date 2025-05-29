@@ -19,7 +19,7 @@ export const guestListSchema = z.object({
     .min(2, { message: "The name and surname the booking will be saved as." }),
   guests: z
     .array(guestSchema)
-    .min(1, { message: "At least one guest is required." }),
+    .min(1, { message: "At least one guest is required for your booking." }),
 });
 
 export type GuestListType = z.infer<typeof guestListSchema>;
