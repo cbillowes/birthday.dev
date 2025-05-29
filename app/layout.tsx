@@ -50,28 +50,9 @@ export const metadata: Metadata = {
   title: "Clarice’s 40th Birthday Celebration",
   description:
     "Join us for a night of celebration as we compile four decades of memories and initialize the next chapter of Clarice’s journey.",
+  metadataBase: new URL("https://rsvp.clarice.bouwer.dev"),
   openGraph: {
-    title: "Clarice’s 40th Birthday Celebration",
-    description:
-      "Join us for a night of celebration as we compile four decades of memories and initialize the next chapter of Clarice’s journey.",
-    url: "https://rsvp.clarice.bouwer.dev",
-    siteName: "Clarice’s 40th Birthday Celebration",
-    images: [
-      {
-        url: "https://rsvp.clarice.bouwer.dev/og-image.png", // hosted static image
-        width: 1200,
-        height: 630,
-        alt: "Clarice is 40!",
-      },
-    ],
-    locale: "en_US",
+    images: ["/og-image.png"],
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Clarice’s 40th Birthday Celebration",
-    description:
-      "Join us for a night of celebration as we compile four decades of memories and initialize the next chapter of Clarice’s journey.",
-    images: ["https://rsvp.clarice.bouwer.dev/og-image.png"],
   },
 };
