@@ -59,7 +59,6 @@ export default function BookingPage() {
                     to="/rsvp"
                     size="lg"
                     className="mt-4 border-chart-2 text-chart-2 hover:bg-chart-2/10"
-                    target="_blank"
                   >
                     RSVP
                   </GhostLinkButton>
