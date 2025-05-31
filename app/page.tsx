@@ -13,6 +13,7 @@ import {
   QrCode,
   ChevronsLeftRightEllipsis,
   Share2,
+  Wine,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import CountdownTimer from "@/components/countdown-timer";
@@ -204,11 +205,8 @@ export default function Home() {
                 >
                   About the Party
                 </TabsTrigger>
-                <TabsTrigger
-                  value="gifts"
-                  className="py-3 font-bold text-white"
-                >
-                  Gift Information
+                <TabsTrigger value="menu" className="py-3 font-bold text-white">
+                  Menu
                 </TabsTrigger>
                 <TabsTrigger value="faq" className="py-3 font-bold text-white">
                   FAQ
@@ -231,18 +229,23 @@ export default function Home() {
                           <li className="flex items-start">
                             <Code className="h-5 w-5 text-chart-1 mr-2 mt-0.5" />
                             <span>
-                              Tech-themed cocktails and hors d'oeuvres
+                              Theme to be decided, so far it is tech-themed.
                             </span>
                           </li>
                           <li className="flex items-start">
                             <Music className="h-5 w-5 text-chart-2 mr-2 mt-0.5" />
-                            <span>
-                              DJ spinning the best hits from the 90s to now
-                            </span>
+                            <span>Light live music to set the mood.</span>
                           </li>
                           <li className="flex items-start">
                             <Gift className="h-5 w-5 text-chart-4 mr-2 mt-0.5" />
-                            <span>Special surprises throughout the night</span>
+                            <span>Food, wine & cake are on the house.</span>
+                          </li>
+                          <li className="flex items-start">
+                            <Wine className="h-5 w-5 text-chart-3 mr-2 mt-0.5" />
+                            <span>
+                              There will be an open bar which will be capped
+                              until the budget is reached.
+                            </span>
                           </li>
                         </ul>
                       </div>
@@ -259,45 +262,16 @@ export default function Home() {
                 </Card>
               </TabsContent>
 
-              <TabsContent value="gifts" className="mt-6">
+              <TabsContent value="menu" className="mt-6">
                 <Card className="border-border/50">
                   <CardContent className="pt-6">
                     <h3 className="text-xl font-bold mb-4 font-mono">
-                      <Code /> Gift Registry
+                      <Code /> Menu
                     </h3>
                     <p className="text-muted-foreground mb-4">
-                      Your presence is the greatest gift! However, if you’d like
-                      to contribute something, Clarice has created a registry
-                      with some items she’d love.
+                      A full menu will be made available on the website when the
+                      owners get back from their vacation.
                     </p>
-                    <p className="text-muted-foreground mb-6">
-                      Alternatively, contributions to her favorite charity,
-                      Girls Who Code, would be greatly appreciated.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="border-chart-1 text-chart-1 hover:bg-chart-1/10"
-                      >
-                        <a href="#" target="_blank" rel="noopener noreferrer">
-                          View Registry
-                        </a>
-                      </Button>
-                      <Button
-                        asChild
-                        variant="outline"
-                        className="border-chart-2 text-chart-2 hover:bg-chart-2/10"
-                      >
-                        <a
-                          href="https://girlswhocode.com/donate"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Donate to Girls Who Code
-                        </a>
-                      </Button>
-                    </div>
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -312,8 +286,8 @@ export default function Home() {
                       <div>
                         <h4 className="font-bold mb-2">When is the big day?</h4>
                         <p className="text-muted-foreground">
-                          My birthday is on Thursday, 30 October. I celebrating
-                          with a party while my mom is in Mauritius.
+                          My birthday is on Thursday, 30 October. I am
+                          celebrating with a party while my mom is in Mauritius.
                         </p>
                       </div>
                       <div>
@@ -321,8 +295,9 @@ export default function Home() {
                           Is there parking available?
                         </h4>
                         <p className="text-muted-foreground">
-                          Yes, complimentary valet parking will be available at
-                          the venue.
+                          Yes, there is free parking available behind the
+                          restaurant. It is encouraged to carpool or use a taxi
+                          service if you are going to be drinking alcohol.
                         </p>
                       </div>
                       <div>
@@ -330,8 +305,10 @@ export default function Home() {
                           Can I bring a plus one?
                         </h4>
                         <p className="text-muted-foreground">
-                          Yes, you’re welcome to bring a guest. Please make sure
-                          to include them in your booking.
+                          Yes, you’re welcome to bring a guest or few. Please
+                          make sure to include them in your booking or share
+                          this website with them. Space is limited but I will
+                          try my best to accommodate everyone.
                         </p>
                       </div>
                       <div>
@@ -339,8 +316,7 @@ export default function Home() {
                           Are children welcome?
                         </h4>
                         <p className="text-muted-foreground">
-                          This is an adults-only celebration. We appreciate your
-                          understanding.
+                          This is an adults-only celebration. 18+ only.
                         </p>
                       </div>
                       <div>
@@ -348,8 +324,10 @@ export default function Home() {
                           What if I have dietary restrictions?
                         </h4>
                         <p className="text-muted-foreground">
-                          Please note any dietary restrictions in your booking,
-                          and we’ll do our best to accommodate them.
+                          A full menu will be made available including starters,
+                          mains and desserts. Selected wine, cocktails and other
+                          beverages are included, until the budget has been
+                          reached. You can buy drinks at the bar after that.
                         </p>
                       </div>
                     </div>
