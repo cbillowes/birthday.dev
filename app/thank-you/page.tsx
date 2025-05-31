@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Confetti from "react-confetti";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Link from "next/link";
 import Image from "next/image";
 import { useWindowSize } from "react-use";
@@ -11,14 +10,11 @@ import tada from "@/app/images/tada.png";
 import { Button } from "@/components/ui/button";
 import { GuestListType } from "@/components/rsvp/schema";
 import { FirebaseProvider } from "@/providers/firebase";
-import RegisterForm from "@/components/register/form";
 import { getRsvp } from "@/components/rsvp/service";
 import { useAuth } from "@/hooks/use-auth";
-import LoginForm from "@/components/login/form";
-import { PrivacyPolicy } from "@/components/privacy";
 import { Loading } from "@/components/loading";
 
-export default function ManagePage() {
+export default function ThankYouPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [rsvp, setRsvp] = useState<GuestListType>();
@@ -29,8 +25,7 @@ export default function ManagePage() {
       if (!user || loading) return;
 
       try {
-        const token = await user.getIdToken();
-        const rsvpData = await getRsvp(token);
+        const rsvpData = await getRsvp(user);
         if (rsvpData) {
           setRsvp(rsvpData);
         } else {
@@ -44,58 +39,6 @@ export default function ManagePage() {
   }, [user, loading, router]);
 
   if (loading) return <Loading />;
-
-  if (!user) {
-    return (
-      <div className="container py-16 md:py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-6"
-        >
-          <h1 className="text-3xl md:text-4xl font-bold mb-2">
-            Manage Your Booking
-          </h1>
-          <div className="w-20 h-1 bg-chart-4 mx-auto mb-6"></div>
-          <p className="max-w-2xl mx-auto">
-            This section requires access to the website. Please log in or
-            register if you have not done so yet.
-          </p>
-        </motion.div>
-
-        <div className="max-w-2xl mx-auto">
-          <Tabs defaultValue="login" className="w-full">
-            <TabsList className="grid w-full grid-cols-1 md:grid-cols-2 h-auto bg-transparent gap-2">
-              <TabsTrigger
-                value="login"
-                className="py-3 bg-black/40 data-[state=active]:bg-chart-4/10 data-[state=active]:text-chart-4"
-              >
-                Log in
-              </TabsTrigger>
-              <TabsTrigger
-                value="register"
-                className="py-3 bg-black/40 data-[state=active]:bg-chart-4/10 data-[state=active]:text-chart-4"
-              >
-                Register
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="login" className="mt-6">
-              <LoginForm buttonClassName="bg-chart-4 hover:bg-chart-4/50 focus:ring-chart-4 text-black" />
-            </TabsContent>
-
-            <TabsContent value="register" className="mt-6">
-              <RegisterForm buttonClassName="bg-chart-4 hover:bg-chart-4/50 focus:ring-chart-4 text-black" />
-            </TabsContent>
-          </Tabs>
-        </div>
-        <div className="mt-3 max-w-2xl mx-auto">
-          <PrivacyPolicy />
-        </div>
-      </div>
-    );
-  }
 
   return (
     user && (
@@ -111,9 +54,12 @@ export default function ManagePage() {
             <h1 className="text-3xl md:text-4xl font-bold mb-4">Thank You!</h1>
             <div className="w-20 h-1 bg-chart-1 mx-auto mb-6"></div>
             <p className="max-w-2xl mx-auto">
-              We have received your response under{" "}
-              <strong className="font-bold">{rsvp?.bookingName}</strong> and
-              look forward to hosting you at this once in a life time event.
+              I have received your response under{" "}
+              <strong className="font-bold">
+                {rsvp?.bookingName}
+              </strong>{" "}
+              and I look forward to hosting you at this once in a life time
+              event.
             </p>
           </motion.div>
           <div className="max-w-2xl mx-auto text-center p-6 border-white/10 bg-black/40 rounded-lg shadow-sm border border-gray-200 animate-fadeIn">
@@ -152,7 +98,9 @@ export default function ManagePage() {
                 className="bg-white text-chart-1 hover:bg-chart-5 text-gray-900 hover:text-white w-full"
                 asChild
               >
-                <span>Create account</span>
+                <Link href="/manage" className="text-black">
+                  Manage your Booking
+                </Link>
               </Button>
               <Button
                 variant="outline"

@@ -1,3 +1,4 @@
+import { User } from "firebase/auth";
 import { GuestListType } from "./schema";
 
 export const saveRsvp = async (token: string, data: GuestListType) => {
@@ -12,7 +13,8 @@ export const saveRsvp = async (token: string, data: GuestListType) => {
   return response.ok;
 };
 
-export const getRsvp = async (token: string) => {
+export const getRsvp = async (user: User) => {
+  const token = await user.getIdToken();
   const response = await fetch("/.netlify/functions/booking", {
     method: "GET",
     headers: {
