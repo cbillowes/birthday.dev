@@ -73,33 +73,41 @@ export default function PortalPage() {
                   })}
                 </span>
               </h2>
-              <table className="w-full text-left border-collapse bg-black/20 border-white/20 border border-t-0">
-                <thead>
-                  <tr className="bg-black/50">
-                    <th className="px-4 py-2 text-white/70">Name</th>
-                    <th className="px-4 py-2 text-white/70">Number</th>
-                    <th className="px-4 py-2 text-white/70">WhatsApp Group?</th>
-                    <th className="px-4 py-2 text-white/70">Comments</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {guests?.map((guest, index) => (
-                    <tr
-                      key={`summary-row-${index}`}
-                      className="border-t border-white/20"
-                    >
-                      <td className="px-4 py-2 text-white/90">{guest.name}</td>
-                      <td className="px-4 py-2 text-white/90">{guest.phone}</td>
-                      <td className="px-4 py-2 text-white/90">
-                        {guest.consentForWhatsApp ? "Yes" : "No"}
-                      </td>
-                      <td className="px-4 py-2 text-white/90">
-                        {guest.requests || "No comments"}
-                      </td>
+              <div className="overflow-scroll">
+                <table className="w-full text-left border-collapse bg-black/20 border-white/20 border border-t-0">
+                  <thead>
+                    <tr className="bg-black/50">
+                      <th className="px-4 py-2 text-white/70">Name</th>
+                      <th className="px-4 py-2 text-white/70">Number</th>
+                      <th className="px-4 py-2 text-white/70">
+                        WhatsApp Group?
+                      </th>
+                      <th className="px-4 py-2 text-white/70">Comments</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {guests?.map((guest, index) => (
+                      <tr
+                        key={`summary-row-${index}`}
+                        className="border-t border-white/20"
+                      >
+                        <td className="px-4 py-2 text-white/90">
+                          {guest.name}
+                        </td>
+                        <td className="px-4 py-2 text-white/90">
+                          {guest.phone}
+                        </td>
+                        <td className="px-4 py-2 text-white/90">
+                          {guest.consentForWhatsApp ? "Yes" : "No"}
+                        </td>
+                        <td className="px-4 py-2 text-white/90">
+                          {guest.requests || "No comments"}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           ))}
         </section>
