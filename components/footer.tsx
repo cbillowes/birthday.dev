@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
-import { Mail, MapPin, Calendar, PhoneIcon } from "lucide-react";
+import { Mail, MapPin, Calendar, PhoneIcon, Share2 } from "lucide-react";
 import { Banner } from "@/components/banner";
 import { useAuth } from "@/hooks/use-auth";
+import { GhostLinkButton } from "@/components/link-button";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -18,6 +19,19 @@ export default function Footer() {
             </div>
             <p className="text-sm text-muted-foreground">
               A celebration of four decades of awesomeness.
+            </p>
+            <p>
+              <GhostLinkButton
+                to={`https://wa.me/?text=${encodeURIComponent(
+                  "Join me for Clarice's 40th birthday celebration! Register and RSVP at https://rsvp.clarice.bouwer.dev"
+                )}`}
+                size="lg"
+                className="mt-4 max-w-xs hover:bg-white/40 border-white/60 bg-transparent text-white flex gap-2"
+                target="_blank"
+              >
+                <Share2 />
+                Share on WhatsApp
+              </GhostLinkButton>
             </p>
           </div>
 
