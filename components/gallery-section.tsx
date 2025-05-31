@@ -611,7 +611,10 @@ export default function GallerySection() {
         </p>
         <p className="text-sm text-white">
           If you don’t have an account, you can{" "}
-          <a href="/register" className="text-chart-3 hover:underline font-bold">
+          <a
+            href="/register"
+            className="text-chart-3 hover:underline font-bold focus:underline"
+          >
             register here
           </a>
           .
