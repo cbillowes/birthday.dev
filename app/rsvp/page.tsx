@@ -11,7 +11,7 @@ import RegisterForm from "@/components/register/form";
 export default function RsvpPage() {
   const { user, loading } = useAuth();
 
-  if (loading) return <Loading />
+  if (loading) return <Loading />;
 
   return (
     <div className="container py-16 md:py-24">
@@ -25,6 +25,12 @@ export default function RsvpPage() {
           I’m thrilled to host you!
         </h1>
         <div className="w-20 h-1 bg-chart-1 mx-auto mb-6"></div>
+        {!user && (
+          <p className="max-w-2xl mx-auto">
+            You need to be logged in before you can book your spot at the party.
+            Space is limited, so get it while it is hot!
+          </p>
+        )}
       </motion.div>
 
       {!user && (
@@ -34,24 +40,24 @@ export default function RsvpPage() {
               <TabsList className="grid w-full grid-cols-1 md:grid-cols-2 h-auto bg-transparent gap-2">
                 <TabsTrigger
                   value="register"
-                  className="py-3 bg-black/40 data-[state=active]:bg-chart-1 data-[state=active]:text-white"
+                  className="py-3 bg-black/40 data-[state=active]:bg-chart-1/10 data-[state=active]:text-white"
                 >
-                  RSVP
+                  Register
                 </TabsTrigger>
                 <TabsTrigger
                   value="login"
-                  className="py-3 bg-black/40 data-[state=active]:bg-chart-1 data-[state=active]:text-white"
+                  className="py-3 bg-black/40 data-[state=active]:bg-chart-1/10 data-[state=active]:text-white"
                 >
-                  Already RSVPed?
+                  Login
                 </TabsTrigger>
               </TabsList>
 
               <TabsContent value="login" className="mt-6">
-                <LoginForm />
+                <LoginForm buttonClassName="bg-chart-1 hover:bg-chart-1/50 focus:ring-chart-1 text-white" />
               </TabsContent>
 
               <TabsContent value="register" className="mt-6">
-                <RegisterForm />
+                <RegisterForm buttonClassName="bg-chart-1 hover:bg-chart-1/50 focus:ring-chart-1 text-white" />
               </TabsContent>
             </Tabs>
           </div>
