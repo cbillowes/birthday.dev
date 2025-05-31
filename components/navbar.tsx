@@ -33,7 +33,7 @@ export default function Navbar() {
     { href: "/gallery", label: "Gallery", show: true },
     { href: "/register", label: "Register", show: !user },
     {
-      href: "/booking",
+      href: "/manage",
       label: "Manage Booking",
       show: true,
     },
@@ -65,7 +65,7 @@ export default function Navbar() {
                     className={cn(
                       "text-sm font-medium transition-colors hover:text-primary",
                       pathname === item.href
-                        ? "text-foreground"
+                        ? "text-chart-5"
                         : "text-muted-foreground"
                     )}
                   >
