@@ -17,9 +17,9 @@ export default function RsvpPage() {
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Register</h1>
           <div className="w-20 h-1 bg-chart-3 mx-auto mb-6"></div>
           <p className="max-w-2xl mx-auto">
-            Register to RSVP, manage your booking, get exclusive content, and
-            share cool stuff with me. If you don’t want to, you can message
-            directly to RSVP.
+            You will gain exclusive access to the event details, the photo
+            gallery of memorable moments, event updates and much more! If you
+            don’t want to, you can message directly to book your spot.
           </p>
         </motion.div>
         <div className="mt-4 max-w-2xl mx-auto text-center animate-fadeIn">
