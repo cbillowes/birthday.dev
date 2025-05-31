@@ -115,7 +115,10 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
+                      onClick={() => {
+                        if (item.onClick) item.onClick();
+                        setMobileMenuOpen(false);
+                      }}
                       className={cn(
                         "py-2 px-3 rounded-md transition-colors",
                         pathname === item.href
