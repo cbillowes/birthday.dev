@@ -40,24 +40,14 @@ export const PartyDetails = () => (
             Twenty-Foot Rd, Pereybere, Mauritius
           </p>
         </div>
-        <div className="flex items-center justify-center gap-2">
-          <GhostLinkButton
-            to="https://maps.google.com"
-            size="lg"
-            className="mt-4 border-chart-2 text-chart-2 hover:bg-chart-2/10 w-full"
-            target="_blank"
-          >
-            View Map
-          </GhostLinkButton>
-          <GhostLinkButton
-            to="https://www.google.com/maps?rlz=1C5CHFA_enMU1093MU1093&gs_lcrp=EgZjaHJvbWUqDggAEEUYJxg7GIAEGIoFMg4IABBFGCcYOxiABBiKBTIGCAEQRRhAMgYIAhBFGDkyEAgDEAAYkQIYsQMYgAQYigUyDQgEEAAYkQIYgAQYigUyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMDM0ajBqMagCALACAA&um=1&ie=UTF-8&fb=1&gl=mu&sa=X&geocode=KcEzzdrQq30hMfEazFrUBR_x&daddr=MU,+Twenty-Foot+Rd,+Pereybere+30546"
-            size="lg"
-            className="mt-4 border-chart-2 text-chart-2 hover:bg-chart-2/10 w-full"
-            target="_blank"
-          >
-            Get Directions
-          </GhostLinkButton>
-        </div>
+        <GhostLinkButton
+          to="https://www.google.com/maps?rlz=1C5CHFA_enMU1093MU1093&gs_lcrp=EgZjaHJvbWUqDggAEEUYJxg7GIAEGIoFMg4IABBFGCcYOxiABBiKBTIGCAEQRRhAMgYIAhBFGDkyEAgDEAAYkQIYsQMYgAQYigUyDQgEEAAYkQIYgAQYigUyBggFEEUYPDIGCAYQRRg8MgYIBxBFGDzSAQgxMDM0ajBqMagCALACAA&um=1&ie=UTF-8&fb=1&gl=mu&sa=X&geocode=KcEzzdrQq30hMfEazFrUBR_x&daddr=MU,+Twenty-Foot+Rd,+Pereybere+30546"
+          size="lg"
+          className="mt-4 border-chart-2 text-chart-2 hover:bg-chart-2/10 w-full"
+          target="_blank"
+        >
+          Get Directions
+        </GhostLinkButton>
       </CardContent>
     </Card>
 
