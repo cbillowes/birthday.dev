@@ -77,7 +77,7 @@ export default function Navbar() {
               asChild
               className="bg-chart-5 hover:bg-chart-2/90 text-white"
             >
-              <Link href="/rsvp">RSVP Now</Link>
+              <Link href="/rsvp">Book your Spot</Link>
             </Button>
           </nav>
         )}
@@ -131,7 +131,7 @@ export default function Navbar() {
                 className="w-full bg-chart-5 hover:bg-chart-5/90 text-white"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                <Link href="/rsvp">RSVP Now</Link>
+                <Link href="/rsvp">Book your Spot</Link>
               </Button>
             </div>
           </motion.div>
