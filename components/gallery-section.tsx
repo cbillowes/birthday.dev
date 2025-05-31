@@ -606,7 +606,7 @@ export default function GallerySection() {
       <div className="max-w-2xl mx-auto mt-8 text-center">
         <p className="text-lg mb-4">
           Please log in to view the gallery. There are some awesome memories I
-          want to share with you! Please feel free to send me more so I can add
+          want to share with you! Feel free to send me more so I can add
           them to the gallery.
         </p>
         <p className="text-sm text-white">

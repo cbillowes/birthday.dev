@@ -141,10 +141,10 @@ export default function Home() {
                         Step 2: Book your Spot
                       </h3>
                       <p className="text-white mb-2">
-                        Book your spot. You can also book on behalf of others!
-                        Space is limited but I will try to accommodate everyone.
-                        Once you book your spot, I will let you know if you are
-                        in.
+                        Book for you and on behalf of others! Space is limited
+                        but I will try to accommodate everyone. Once you book
+                        your spot, I will let you know if you are in within a
+                        few days.
                       </p>
                     </div>
                   </CardContent>
