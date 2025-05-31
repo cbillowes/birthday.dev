@@ -7,7 +7,8 @@ import GuestList from "./list";
 import { saveRsvp } from "./service";
 import { Spinner } from "@/components/spinner";
 import { useAuth } from "@/hooks/use-auth";
-import { PrivacyPolicy } from "../privacy";
+import { PrivacyPolicy } from "@/components/privacy";
+import { ErrorToast } from "@/components/error-toast";
 
 const GuestForm: React.FC = () => {
   const { user } = useAuth();
@@ -67,6 +68,10 @@ const GuestForm: React.FC = () => {
           </div>
         </div>
       </form>
+      <ErrorToast
+        message={errorMessage}
+        onClose={() => setErrorMessage(null)}
+      />
     </div>
   );
 };

@@ -10,6 +10,7 @@ import { UserType, userSchema } from "@/components/register/schema";
 import { Checkbox } from "@/components/ui/checkbox";
 import { loginUser } from "@/components/login/service";
 import { cn } from "@/lib/utils";
+import { ErrorToast } from "@/components/error-toast";
 
 const RegisterForm: React.FC<{
   hideHeader?: boolean;
@@ -145,14 +146,13 @@ const RegisterForm: React.FC<{
               {isSubmitting && <Spinner />}
               {isSubmitting ? "Registering..." : "Register your account"}
             </button>
-            {errorMessage && (
-              <p className="mt-3 bg-red-200 text-red-900 text-sm p-4 rounded-md flex gap-2 items-center justify-start">
-                🚨 <span className="font-bold">Whoops:</span> {errorMessage}
-              </p>
-            )}
           </div>
         </div>
       </form>
+      <ErrorToast
+        message={errorMessage}
+        onClose={() => setErrorMessage(null)}
+      />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { ErrorMessage } from "@/components/error-message";
 import { loginUser } from "@/components/login/service";
 import { UserType, userSchema } from "@/components/login/schema";
 import { cn } from "@/lib/utils";
+import { ErrorToast } from "@/components/error-toast";
 
 const LoginForm: React.FC<{
   hideHeader?: boolean;
@@ -111,14 +112,13 @@ const LoginForm: React.FC<{
               {isSubmitting && <Spinner />}
               {isSubmitting ? "Thinking..." : "Log in"}
             </button>
-            {errorMessage && (
-              <p className="mt-3 bg-red-200 text-red-900 text-sm p-4 rounded-md flex gap-2 items-center justify-start">
-                🚨 <span className="font-bold">Whoops:</span> {errorMessage}
-              </p>
-            )}
           </div>
         </div>
       </form>
+      <ErrorToast
+        message={errorMessage}
+        onClose={() => setErrorMessage(null)}
+      />
     </div>
   );
 };

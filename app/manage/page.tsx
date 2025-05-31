@@ -10,25 +10,30 @@ import { Card, CardContent } from "@/components/ui/card";
 import { GhostLinkButton } from "@/components/link-button";
 import { Loading } from "@/components/loading";
 import { getRsvp } from "@/components/rsvp/service";
-import CountdownTimer from "@/components/countdown-timer";
+import { GuestListType } from "@/components/rsvp/schema";
+import { ErrorToast } from "@/components/error-toast";
 
-export default function BookingPage() {
+export default function ManagePage() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const [hasBooking, setHasBooking] = useState(false);
+  const [booking, setBooking] = useState<GuestListType>();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
+      return;
     }
 
     const checkBooking = async () => {
       try {
         if (!user) return;
         const booking = await getRsvp(user);
-        setHasBooking(booking !== null);
+        setBooking(booking);
       } catch (error) {
-        setHasBooking(false);
+        setErrorMessage(
+          "An error occurred while fetching your booking. Please try again later."
+        );
       }
     };
     checkBooking();
@@ -54,12 +59,9 @@ export default function BookingPage() {
             also book your spot and manage your booking for this event.
           </p>
         </motion.div>
-        <div className="text-center mb-8">
-          <CountdownTimer targetDate="2025-07-19T16:30:00" />
-        </div>
         <section id="details" className="max-w-7xl mx-auto mb-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {!hasBooking && (
+            {!booking && (
               <Card className="bg-card/50 backdrop-blur-sm border-border/50">
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center justify-end text-center">
@@ -81,7 +83,7 @@ export default function BookingPage() {
                 </CardContent>
               </Card>
             )}
-            {hasBooking && (
+            {booking && (
               <Card className="bg-card/50 backdrop-blur-sm border-border/50">
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center justify-end text-center">
@@ -167,6 +169,10 @@ export default function BookingPage() {
           <PartyDetails />
         </section>
       </div>
+      <ErrorToast
+        message={errorMessage}
+        onClose={() => setErrorMessage(null)}
+      />
     </FirebaseProvider>
   );
 }
