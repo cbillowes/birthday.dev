@@ -7,14 +7,12 @@ import { useAuth } from "@/hooks/use-auth";
 import { Loading } from "@/components/loading";
 import { getRsvp } from "@/components/rsvp/service";
 import { GuestListType } from "@/components/rsvp/schema";
-import { ErrorToast } from "@/components/error-toast";
 import GuestForm from "@/components/rsvp/form";
 
 export default function ManagePage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [booking, setBooking] = useState<GuestListType>();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user && !loading) {
@@ -28,9 +26,6 @@ export default function ManagePage() {
         const booking = await getRsvp(user);
         setBooking(booking);
       } catch (error) {
-        setErrorMessage(
-          "An error occurred while fetching your booking. Please try again later."
-        );
       }
     };
     checkBooking();
@@ -56,10 +51,6 @@ export default function ManagePage() {
           <GuestForm data={booking} />
         </section>
       </div>
-      <ErrorToast
-        message={errorMessage}
-        onClose={() => setErrorMessage(null)}
-      />
     </FirebaseProvider>
   );
 }
