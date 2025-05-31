@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { motion } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { Card } from "@/components/ui/card";
+import { motion } from "framer-motion";
 
 interface CountdownTimerProps {
   targetDate: string;
@@ -20,7 +20,7 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0
+    seconds: 0,
   });
 
   useEffect(() => {
@@ -32,14 +32,14 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
           hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
           minutes: Math.floor((difference / (1000 * 60)) % 60),
-          seconds: Math.floor((difference / 1000) % 60)
+          seconds: Math.floor((difference / 1000) % 60),
         });
       } else {
         setTimeLeft({
           days: 0,
           hours: 0,
           minutes: 0,
-          seconds: 0
+          seconds: 0,
         });
       }
     };
@@ -51,11 +51,17 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   }, [targetDate]);
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 md:gap-5">
-      <TimeCard label="Days" value={timeLeft.days} />
-      <TimeCard label="Hours" value={timeLeft.hours} />
-      <TimeCard label="Minutes" value={timeLeft.minutes} />
-      <TimeCard label="Seconds" value={timeLeft.seconds} />
+    <div>
+      <div className="flex flex-wrap justify-center gap-3 md:gap-5">
+        <TimeCard label="Days" value={timeLeft.days} />
+        <TimeCard label="Hours" value={timeLeft.hours} />
+        <TimeCard label="Minutes" value={timeLeft.minutes} />
+        <TimeCard label="Seconds" value={timeLeft.seconds} />
+      </div>
+      <div className="mt-4 max-w-md mx-auto flex flex-col gap-4 uppercase text-sm text-white/40">
+        <hr />
+        Countdown to the party
+      </div>
     </div>
   );
 }
@@ -69,7 +75,7 @@ function TimeCard({ label, value }: { label: string; value: number }) {
         animate={{ opacity: 1, y: 0 }}
         className="font-mono text-2xl md:text-3xl font-bold text-chart-5"
       >
-        {value.toString().padStart(2, '0')}
+        {value.toString().padStart(2, "0")}
       </motion.div>
       <div className="text-xs text-muted-foreground mt-1">{label}</div>
     </Card>

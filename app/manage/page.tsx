@@ -16,7 +16,7 @@ import { getRsvp } from "@/components/rsvp/service";
 import { useAuth } from "@/hooks/use-auth";
 import LoginForm from "@/components/login/form";
 import { PrivacyPolicy } from "@/components/privacy";
-import { Spinner } from "@/components/spinner";
+import { Loading } from "@/components/loading";
 
 export default function ManagePage() {
   const { user, loading } = useAuth();
@@ -45,12 +45,7 @@ export default function ManagePage() {
     fetchRsvp();
   }, [user, loading, router]);
 
-  if (loading)
-    return (
-      <div className="max-w-2xl h-screen mx-auto mt-8 justify-center items-center flex">
-        <Spinner />
-      </div>
-    );
+  if (loading) return <Loading />;
 
   if (!!user) {
     return (

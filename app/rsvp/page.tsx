@@ -1,22 +1,17 @@
 "use client";
 import { motion } from "framer-motion";
-import GuestForm from "@/components/rsvp/form";
+import { useAuth } from "@/hooks/use-auth";
 import { PrivacyPolicy } from "@/components/privacy";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Spinner } from "@/components/spinner";
-import { useAuth } from "@/hooks/use-auth";
+import { Loading } from "@/components/loading";
+import GuestForm from "@/components/rsvp/form";
 import LoginForm from "@/components/login/form";
 import RegisterForm from "@/components/register/form";
 
 export default function RsvpPage() {
   const { user, loading } = useAuth();
 
-  if (loading)
-    return (
-      <div className="max-w-2xl h-screen mx-auto mt-8 justify-center items-center flex">
-        <Spinner />
-      </div>
-    );
+  if (loading) return <Loading />
 
   return (
     <div className="container py-16 md:py-24">

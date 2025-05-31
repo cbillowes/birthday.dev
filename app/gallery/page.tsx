@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import GallerySection from "@/components/gallery-section";
 
-export default function RsvpPage() {
+export default function GalleryPage() {
   return (
     <div className="container py-16 md:py-24">
       <motion.div

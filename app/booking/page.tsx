@@ -1,14 +1,14 @@
 "use client";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import { Focus, NotebookTabs, Sparkles } from "lucide-react";
 import { FirebaseProvider } from "@/providers/firebase";
 import { useAuth } from "@/hooks/use-auth";
-import { useRouter } from "next/navigation";
-import { Spinner } from "@/components/spinner";
 import { PartyDetails } from "@/components/party-details";
 import { Card, CardContent } from "@/components/ui/card";
-import { Focus, NotebookTabs, Sparkles } from "lucide-react";
 import { GhostLinkButton } from "@/components/link-button";
+import { Loading } from "@/components/loading";
 
 export default function BookingPage() {
   const { user, loading } = useAuth();
@@ -20,12 +20,7 @@ export default function BookingPage() {
     }
   }, [user, loading, router]);
 
-  if (loading)
-    return (
-      <div className="max-w-2xl h-screen mx-auto mt-8 justify-center items-center flex">
-        <Spinner />
-      </div>
-    );
+  if (loading) return <Loading />
 
   return (
     <FirebaseProvider>
