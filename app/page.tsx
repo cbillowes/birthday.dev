@@ -381,7 +381,7 @@ export default function Home() {
             <div className="w-20 h-1 bg-chart-5 mx-auto mb-6"></div>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
               What are you waiting for? Don’t miss this special celebration! Let
-              us know if you’ll be joining us.
+              me know if you’ll be joining us.
             </p>
             <Button
               asChild
