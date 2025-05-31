@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { GhostLinkButton } from "@/components/link-button";
 import { Loading } from "@/components/loading";
 import { getRsvp } from "@/components/rsvp/service";
+import CountdownTimer from "@/components/countdown-timer";
 
 export default function BookingPage() {
   const { user, loading } = useAuth();
@@ -53,6 +54,9 @@ export default function BookingPage() {
             also book your spot and manage your booking for this event.
           </p>
         </motion.div>
+        <div className="text-center mb-8">
+          <CountdownTimer targetDate="2025-07-19T16:30:00" />
+        </div>
         <section id="details" className="max-w-7xl mx-auto mb-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {!hasBooking && (
@@ -108,18 +112,32 @@ export default function BookingPage() {
                   <div className="mb-4 p-3 rounded-full bg-chart-2/20">
                     <TerminalSquare className="h-8 w-8 text-chart-2" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Contact Info</h3>
-                  <p className="text-muted-foreground mb-2">
-                    <a href="mailto:clarice@bouwer.dev" className="text-white hover:underline">
+                  <h3 className="text-xl font-bold mb-2">Contact Details</h3>
+                  <p className="text-muted-foreground mb-2 flex gap-2">
+                    <a
+                      href="mailto:clarice@bouwer.dev"
+                      className="text-white hover:underline"
+                    >
                       clarice@bouwer.dev
-                    </a>
-                  </p>
-                  <p className="text-muted-foreground">
-                    <a href="tel:+23054551651" className="text-white hover:underline">
+                    </a>{" "}
+                    |
+                    <a
+                      href="tel:+23054551651"
+                      className="text-white hover:underline"
+                    >
                       +230 5455 1651
                     </a>
                   </p>
                 </div>
+                <GhostLinkButton
+                  to="/vcard.vcf"
+                  size="lg"
+                  className="mt-4 border-chart-2 text-chart-2 hover:bg-chart-2/10"
+                  as="clarice.vcf"
+                  target="_blank"
+                >
+                  Add to Contacts
+                </GhostLinkButton>
               </CardContent>
             </Card>
 

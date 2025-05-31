@@ -65,7 +65,7 @@ export default function Home() {
             </div>
 
             <div className="mt-12">
-              <CountdownTimer targetDate="2025-07-19T18:30:00" />
+              <CountdownTimer targetDate="2025-07-19T16:30:00" />
             </div>
           </motion.div>
         </div>
