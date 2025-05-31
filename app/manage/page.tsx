@@ -2,12 +2,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Focus, NotebookTabs, Sparkles, TerminalSquare } from "lucide-react";
 import { FirebaseProvider } from "@/providers/firebase";
 import { useAuth } from "@/hooks/use-auth";
-import { PartyDetails } from "@/components/party-details";
-import { Card, CardContent } from "@/components/ui/card";
-import { GhostLinkButton } from "@/components/link-button";
 import { Loading } from "@/components/loading";
 import { getRsvp } from "@/components/rsvp/service";
 import { GuestListType } from "@/components/rsvp/schema";
