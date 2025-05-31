@@ -38,7 +38,7 @@ export default function ManagePage() {
           router.push("/rsvp");
         }
       } catch (error) {
-        console.error("Failed to fetch RSVP data:", error);
+        console.error("Failed to fetch booking data:", error);
         router.push("/rsvp");
       }
     };

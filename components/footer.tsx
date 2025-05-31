@@ -23,7 +23,7 @@ export default function Footer() {
             <p>
               <GhostLinkButton
                 to={`https://wa.me/?text=${encodeURIComponent(
-                  "Join me for Clarice's 40th birthday celebration! Register and RSVP at https://rsvp.clarice.bouwer.dev"
+                  "Join me for Clarice's 40th birthday celebration! Register and book your spot at https://rsvp.clarice.bouwer.dev"
                 )}`}
                 size="lg"
                 className="mt-4 max-w-xs hover:bg-white/40 border-white/60 bg-transparent text-white flex gap-2"
@@ -61,7 +61,7 @@ export default function Footer() {
                   href="/rsvp"
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
-                  RSVP
+                  Book your Spot
                 </Link>
               </li>
               <li>

@@ -35,7 +35,7 @@ export default function BookingPage() {
           <div className="w-20 h-1 bg-chart-5 mx-auto mb-6"></div>
           <p className="max-w-2xl mx-auto">
             You now have access to exclusive content in the website. You can
-            also RSVP and manage your booking for this event.
+            also book your spot and manage your booking for this event.
           </p>
         </motion.div>
         <section id="details" className="max-w-7xl mx-auto mb-4">
@@ -55,7 +55,7 @@ export default function BookingPage() {
                     size="lg"
                     className="mt-4 border-chart-2 text-chart-2 hover:bg-chart-2/10"
                   >
-                    RSVP
+                    Book your Spot
                   </GhostLinkButton>
                 </div>
               </CardContent>

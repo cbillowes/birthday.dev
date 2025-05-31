@@ -25,7 +25,7 @@ const handler: Handler = async (event, context) => {
   } else {
     return {
       statusCode: 400,
-      body: JSON.stringify({ message: "Missing RSVP data." }),
+      body: JSON.stringify({ message: "Missing booking data." }),
     };
   }
 };

@@ -136,11 +136,14 @@ export default function Home() {
                       <div className="mb-4 p-3 rounded-full bg-black/40">
                         <QrCode className="h-8 w-8 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold mb-2">Step 2: RSVP</h3>
+                      <h3 className="text-xl font-bold mb-2">
+                        Step 2: Book your Spot
+                      </h3>
                       <p className="text-white mb-2">
                         Book your spot. You can also book on behalf of others!
                         Space is limited but I will try to accommodate everyone.
-                        Once you RSVP, I will let you know if you are in.
+                        Once you book your spot, I will let you know if you are
+                        in.
                       </p>
                     </div>
                   </CardContent>
@@ -158,7 +161,9 @@ export default function Home() {
                         to publish on the website.
                       </p>
                       <GhostLinkButton
-                        to={`https://wa.me/?text=${encodeURIComponent("Join me for Clarice's 40th birthday celebration! Register and RSVP at https://rsvp.clarice.bouwer.dev")}`}
+                        to={`https://wa.me/?text=${encodeURIComponent(
+                          "Join me for Clarice's 40th birthday celebration! Register and book your spot at https://rsvp.clarice.bouwer.dev"
+                        )}`}
                         size="lg"
                         className="mt-4 hover:bg-white/40 border-white/60 bg-white/20 text-white"
                         target="_blank"
@@ -326,7 +331,7 @@ export default function Home() {
                         </h4>
                         <p className="text-muted-foreground">
                           Yes, you’re welcome to bring a guest. Please make sure
-                          to include them in your RSVP.
+                          to include them in your booking.
                         </p>
                       </div>
                       <div>
@@ -343,8 +348,8 @@ export default function Home() {
                           What if I have dietary restrictions?
                         </h4>
                         <p className="text-muted-foreground">
-                          Please note any dietary restrictions in your RSVP, and
-                          we’ll do our best to accommodate them.
+                          Please note any dietary restrictions in your booking,
+                          and we’ll do our best to accommodate them.
                         </p>
                       </div>
                     </div>
