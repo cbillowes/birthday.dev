@@ -84,11 +84,11 @@ export default function ManagePage() {
             </TabsList>
 
             <TabsContent value="login" className="mt-6">
-              <LoginForm buttonClassName="bg-chart-4 hover:bg-chart4/50 focus:ring-chart-4 text-black" />
+              <LoginForm buttonClassName="bg-chart-4 hover:bg-chart-4/50 focus:ring-chart-4 text-black" />
             </TabsContent>
 
             <TabsContent value="register" className="mt-6">
-              <RegisterForm buttonClassName="bg-chart-4 hover:bg-chart4/50 focus:ring-chart-4 text-black" />
+              <RegisterForm buttonClassName="bg-chart-4 hover:bg-chart-4/50 focus:ring-chart-4 text-black" />
             </TabsContent>
           </Tabs>
         </div>
