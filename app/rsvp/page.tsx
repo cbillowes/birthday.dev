@@ -1,16 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
 import { useAuth } from "@/hooks/use-auth";
-import { PrivacyPolicy } from "@/components/privacy";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Loading } from "@/components/loading";
 import GuestForm from "@/components/rsvp/form";
-import LoginForm from "@/components/login/form";
-import RegisterForm from "@/components/register/form";
 import { useEffect, useState } from "react";
 import { GuestListType } from "@/components/rsvp/schema";
 import { getRsvp } from "@/components/rsvp/service";
 import { useRouter } from "next/navigation";
+import { ErrorToast } from "@/components/error-toast";
 
 export default function RsvpPage() {
   const router = useRouter();
@@ -19,7 +16,10 @@ export default function RsvpPage() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!user && !loading) {
+    if (loading) return;
+
+    if (!user) {
+      router.push("/login");
       return;
     }
 
@@ -58,41 +58,11 @@ export default function RsvpPage() {
           </p>
         )}
       </motion.div>
-
-      {!user && (
-        <>
-          <div className="max-w-2xl mx-auto">
-            <Tabs defaultValue="register" className="w-full">
-              <TabsList className="grid w-full grid-cols-1 md:grid-cols-2 h-auto bg-transparent gap-2">
-                <TabsTrigger
-                  value="register"
-                  className="py-3 bg-black/40 data-[state=active]:bg-chart-1/10 data-[state=active]:text-white"
-                >
-                  Register
-                </TabsTrigger>
-                <TabsTrigger
-                  value="login"
-                  className="py-3 bg-black/40 data-[state=active]:bg-chart-1/10 data-[state=active]:text-white"
-                >
-                  Login
-                </TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="login" className="mt-6">
-                <LoginForm buttonClassName="bg-chart-1 hover:bg-chart-1/50 focus:ring-chart-1 text-white" />
-              </TabsContent>
-
-              <TabsContent value="register" className="mt-6">
-                <RegisterForm buttonClassName="bg-chart-1 hover:bg-chart-1/50 focus:ring-chart-1 text-white" />
-              </TabsContent>
-            </Tabs>
-          </div>
-          <div className="mt-3 max-w-2xl mx-auto">
-            <PrivacyPolicy />
-          </div>
-        </>
-      )}
-      {user && <GuestForm data={booking} />}
+      <GuestForm data={booking} />
+      <ErrorToast
+        message={errorMessage}
+        onClose={() => setErrorMessage(null)}
+      />
     </div>
   );
 }
