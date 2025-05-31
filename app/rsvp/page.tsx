@@ -7,13 +7,11 @@ import { useEffect, useState } from "react";
 import { GuestListType } from "@/components/rsvp/schema";
 import { getRsvp } from "@/components/rsvp/service";
 import { useRouter } from "next/navigation";
-import { ErrorToast } from "@/components/error-toast";
 
 export default function RsvpPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
   const [booking, setBooking] = useState<GuestListType>();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (loading) return;
@@ -29,9 +27,6 @@ export default function RsvpPage() {
         const booking = await getRsvp(user);
         setBooking(booking);
       } catch (error) {
-        setErrorMessage(
-          "An error occurred while fetching your booking. Please try again later."
-        );
       }
     };
     checkBooking();
@@ -59,10 +54,6 @@ export default function RsvpPage() {
         )}
       </motion.div>
       <GuestForm data={booking} />
-      <ErrorToast
-        message={errorMessage}
-        onClose={() => setErrorMessage(null)}
-      />
     </div>
   );
 }
