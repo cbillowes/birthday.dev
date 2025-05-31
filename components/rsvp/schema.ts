@@ -21,3 +21,13 @@ export const guestListSchema = z.object({
 });
 
 export type GuestListType = z.infer<typeof guestListSchema>;
+
+export const rsvpSchema = z.object({
+  bookingName: z.string(),
+  ref: z.string(),
+  guests: z.array(guestSchema),
+  userId: z.string(),
+  createdAt: z.number(),
+});
+
+export type RsvpType = z.infer<typeof rsvpSchema>;
