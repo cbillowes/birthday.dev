@@ -66,7 +66,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/manage"
+                  href="/booking"
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
                   Manage Booking

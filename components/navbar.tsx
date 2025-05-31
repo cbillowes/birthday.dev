@@ -22,7 +22,7 @@ export default function Navbar() {
     try {
       await signOut(auth);
       localStorage.removeItem("token");
-      router.push("/manage");
+      router.push("/");
     } catch (error) {
       console.error("Error signing out:", error);
     }
@@ -33,7 +33,7 @@ export default function Navbar() {
     { href: "/gallery", label: "Gallery", show: true },
     { href: "/register", label: "Register", show: !user },
     {
-      href: "/manage",
+      href: "/booking",
       label: "Manage Booking",
       show: true,
     },

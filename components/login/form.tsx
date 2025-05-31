@@ -35,9 +35,15 @@ const LoginForm: React.FC<{
   } = form;
 
   const onSubmit = async (data: UserType) => {
-    const token = await loginUser(data);
-    localStorage.setItem("token", JSON.stringify(token));
-    router.push("/booking");
+    try {
+      const token = await loginUser(data);
+      localStorage.setItem("token", JSON.stringify(token));
+      router.push("/booking");
+    } catch (error: any) {
+      setErrorMessage(
+        "Could not log you in. Please ensure your email and password are correct."
+      );
+    }
   };
 
   return (

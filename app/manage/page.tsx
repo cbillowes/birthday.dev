@@ -31,15 +31,13 @@ export default function ManagePage() {
       try {
         const token = await user.getIdToken();
         const rsvpData = await getRsvp(token);
-        console.log(rsvpData);
         if (rsvpData) {
           setRsvp(rsvpData);
         } else {
-          router.push("/rsvp");
+          router.push("/booking");
         }
       } catch (error) {
         console.error("Failed to fetch booking data:", error);
-        router.push("/rsvp");
       }
     };
     fetchRsvp();

@@ -36,7 +36,7 @@ const GuestForm: React.FC = () => {
     const token = await user?.getIdToken();
     const saved = await saveRsvp(token, data);
     if (saved) {
-      router.push("/manage");
+      router.push("/thank-you");
     } else {
       setErrorMessage(
         "Your booking could not be saved. Please try again later."

@@ -16,11 +16,11 @@ export default function BookingPage() {
 
   useEffect(() => {
     if (!user && !loading) {
-      router.push("/manage");
+      router.push("/login");
     }
   }, [user, loading, router]);
 
-  if (loading) return <Loading />
+  if (loading) return <Loading />;
 
   return (
     <FirebaseProvider>
@@ -73,11 +73,11 @@ export default function BookingPage() {
                     You do not currently have a booking.
                   </p>
                   <GhostLinkButton
-                    to="/manage"
+                    to="/booking"
                     size="lg"
                     className="mt-4 border-chart-1 text-chart-1 hover:bg-chart-1/10"
                   >
-                    Manage
+                    Manage your Booking
                   </GhostLinkButton>
                 </div>
               </CardContent>
