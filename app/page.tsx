@@ -57,7 +57,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
               <PrimaryLinkButton size="lg" to="/rsvp">
-                RSVP Now
+                Register
               </PrimaryLinkButton>
               <GhostLinkButton size="lg" to="#details">
                 View Details
