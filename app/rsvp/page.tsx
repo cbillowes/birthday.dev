@@ -7,9 +7,35 @@ import { Loading } from "@/components/loading";
 import GuestForm from "@/components/rsvp/form";
 import LoginForm from "@/components/login/form";
 import RegisterForm from "@/components/register/form";
+import { useEffect, useState } from "react";
+import { GuestListType } from "@/components/rsvp/schema";
+import { getRsvp } from "@/components/rsvp/service";
+import { useRouter } from "next/navigation";
 
 export default function RsvpPage() {
+  const router = useRouter();
   const { user, loading } = useAuth();
+  const [booking, setBooking] = useState<GuestListType>();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!user && !loading) {
+      return;
+    }
+
+    const checkBooking = async () => {
+      try {
+        if (!user) return;
+        const booking = await getRsvp(user);
+        setBooking(booking);
+      } catch (error) {
+        setErrorMessage(
+          "An error occurred while fetching your booking. Please try again later."
+        );
+      }
+    };
+    checkBooking();
+  }, [user, loading, router]);
 
   if (loading) return <Loading />;
 
@@ -66,7 +92,7 @@ export default function RsvpPage() {
           </div>
         </>
       )}
-      {user && <GuestForm />}
+      {user && <GuestForm data={booking} />}
     </div>
   );
 }
