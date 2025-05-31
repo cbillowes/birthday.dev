@@ -1,4 +1,3 @@
-import { uuidv7 } from "uuidv7";
 import { GuestListType } from "./schema";
 import { db } from "@/firebase/config";
 
@@ -6,7 +5,7 @@ export const saveRsvp = async (
   userId: string,
   { guests, bookingName }: GuestListType
 ) => {
-  const ref = uuidv7();
+  const ref = userId;
   await db.collection("guests").doc(ref).set({
     userId,
     bookingName,

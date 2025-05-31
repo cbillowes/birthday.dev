@@ -1,7 +1,8 @@
 import { User } from "firebase/auth";
 import { GuestListType } from "./schema";
 
-export const saveRsvp = async (token: string, data: GuestListType) => {
+export const saveRsvp = async (user: User, data: GuestListType) => {
+  const token = await user.getIdToken();
   const response = await fetch("/.netlify/functions/rsvp", {
     method: "POST",
     headers: {

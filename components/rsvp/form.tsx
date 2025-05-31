@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,9 +10,12 @@ import { useAuth } from "@/hooks/use-auth";
 import { PrivacyPolicy } from "@/components/privacy";
 import { ErrorToast } from "@/components/error-toast";
 
-const GuestForm: React.FC = () => {
+const GuestForm: React.FC<{
+  data?: GuestListType;
+}> = ({ data }) => {
+  const [mounted, setMounted] = useState(false);
   const { user } = useAuth();
-  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
 
   const form = useForm<GuestListType>({
@@ -27,20 +30,33 @@ const GuestForm: React.FC = () => {
   const {
     handleSubmit,
     formState: { isSubmitting },
+    reset,
   } = form;
+
+  useEffect(() => {
+    if (!mounted && data) {
+      reset(data);
+      setMounted(true);
+    }
+  }, [mounted, data, reset]);
 
   const onSubmit = async (data: GuestListType) => {
     if (!user) {
       setErrorMessage("You must be logged in to save your booking.");
       return;
     }
-    const token = await user?.getIdToken();
-    const saved = await saveRsvp(token, data);
-    if (saved) {
-      router.push("/thank-you");
-    } else {
+    try {
+      const saved = await saveRsvp(user, data);
+      if (saved) {
+        router.push("/thank-you");
+      } else {
+        setErrorMessage(
+          "Your booking could not be saved. Please try again later."
+        );
+      }
+    } catch (error) {
       setErrorMessage(
-        "Your booking could not be saved. Please try again later."
+        "An error occurred while saving your booking. Please try again later."
       );
     }
   };
