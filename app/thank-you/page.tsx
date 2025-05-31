@@ -29,7 +29,7 @@ export default function ThankYouPage() {
         if (rsvpData) {
           setRsvp(rsvpData);
         } else {
-          router.push("/booking");
+          router.push("/manage");
         }
       } catch (error) {
         console.error("Failed to fetch booking data:", error);

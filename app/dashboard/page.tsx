@@ -12,7 +12,7 @@ import { Loading } from "@/components/loading";
 import { getRsvp } from "@/components/rsvp/service";
 import CountdownTimer from "@/components/countdown-timer";
 
-export default function BookingPage() {
+export default function DashboardPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [hasBooking, setHasBooking] = useState(false);
@@ -45,9 +45,7 @@ export default function BookingPage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Manage your Booking
-          </h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Welcome</h1>
           <div className="w-20 h-1 bg-chart-5 mx-auto mb-6"></div>
           <p className="max-w-2xl mx-auto">
             You now have access to exclusive content in the website. You can

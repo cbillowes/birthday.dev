@@ -39,7 +39,7 @@ const LoginForm: React.FC<{
     try {
       const token = await loginUser(data);
       localStorage.setItem("token", JSON.stringify(token));
-      router.push("/booking");
+      router.push("/dashboard");
     } catch (error: any) {
       setErrorMessage(
         "Could not log you in. Please ensure your email and password are correct."

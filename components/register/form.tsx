@@ -47,7 +47,7 @@ const RegisterForm: React.FC<{
     if (response.ok) {
       const token = await loginUser(data);
       localStorage.setItem("token", JSON.stringify(token));
-      router.push("/booking");
+      router.push("/dashboard");
     } else {
       setErrorMessage("Whoops, something went wrong. Please try again.");
     }

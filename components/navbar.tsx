@@ -32,8 +32,9 @@ export default function Navbar() {
     { href: "/", label: "Home", show: true },
     { href: "/gallery", label: "Gallery", show: true },
     { href: "/register", label: "Register", show: !user },
+    { href: "/dashboard", label: "My Dashboard", show: !!user },
     {
-      href: "/booking",
+      href: "/manage",
       label: "Manage Booking",
       show: true,
     },

@@ -64,9 +64,19 @@ export default function Footer() {
                   Book your Spot
                 </Link>
               </li>
+              {user && (
+                <li>
+                  <Link
+                    href="/dashboard"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                  >
+                    My Dashboard
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link
-                  href="/booking"
+                  href="/manage"
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
                   Manage Booking
