@@ -27,10 +27,8 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
       ...guests,
       {
         name: guests.length === 0 ? bookingName : "",
-        email: "",
         phone: "",
         requests: "",
-        consentForEmail: false,
         consentForWhatsApp: false,
       },
     ]);
