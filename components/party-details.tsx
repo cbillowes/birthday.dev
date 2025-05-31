@@ -20,7 +20,7 @@ export const PartyDetails = () => (
             as="save-the-date-clarice.ics"
             target="_blank"
           >
-            Add to Calendar
+            Save the Date
           </GhostLinkButton>
         </div>
       </CardContent>

@@ -163,7 +163,7 @@ export default function ManagePage() {
                   download="save-the-date-clarice.ics"
                   className="text-white"
                 >
-                  Add to Calendar
+                  Save the Date
                 </Link>
               </Button>
             </div>
