@@ -57,9 +57,16 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
-              <PrimaryLinkButton size="lg" to="/rsvp">
-                Register
-              </PrimaryLinkButton>
+              {user && (
+                <PrimaryLinkButton size="lg" to="/dashboard">
+                  Dashboard
+                </PrimaryLinkButton>
+              )}
+              {!user && (
+                <PrimaryLinkButton size="lg" to="/register">
+                  Register
+                </PrimaryLinkButton>
+              )}
               <GhostLinkButton size="lg" to="#details">
                 View Details
               </GhostLinkButton>
@@ -388,7 +395,7 @@ export default function Home() {
               size="lg"
               className="bg-chart-5 hover:bg-chart-5/90 text-white"
             >
-              <Link href="/rsvp">Register Now</Link>
+              <Link href="/register">Register Now</Link>
             </Button>
           </motion.div>
         </div>
