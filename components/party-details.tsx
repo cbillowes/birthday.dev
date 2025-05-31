@@ -69,7 +69,9 @@ export const PartyDetails = () => (
           </div>
           <h3 className="text-xl font-bold mb-2">Dress Code</h3>
           <p className="text-muted-foreground">
-            Wear whatever makes you comfortable and is socially acceptable.
+            I like unicorns, geeky stuff and software development. There is no
+            dress code for any of these so wear whatever makes you comfortable
+            and is socially acceptable.
           </p>
         </div>
       </CardContent>
