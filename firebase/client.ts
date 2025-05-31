@@ -1,5 +1,14 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
+  connectAuthEmulator,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBJMG2DWeECsdFY6Rvu1JIkUN9L-6v1I0Y",
@@ -11,26 +20,27 @@ const firebaseConfig = {
   measurementId: "G-7RN1EBPMGY",
 };
 
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
-
-let analytics: ReturnType<typeof getAnalytics> | undefined = undefined;
-
 console.log(
   " ▗▖ ▗▖▗▄▄▄▖▗▖    ▗▄▄▖ ▗▄▖ ▗▖  ▗▖▗▄▄▄▖\n",
   "▐▌ ▐▌▐▌   ▐▌   ▐▌   ▐▌ ▐▌▐▛▚▞▜▌▐▌   \n",
   "▐▌ ▐▌▐▛▀▀▘▐▌   ▐▌   ▐▌ ▐▌▐▌  ▐▌▐▛▀▀▘\n",
   "▐▙█▟▌▐▙▄▄▖▐▙▄▄▖▝▚▄▄▖▝▚▄▞▘▐▌  ▐▌▐▙▄▄▖\n"
 );
-console.log("Initializing Firebase app...");
-console.log(
-  "I've got some analytics because I want to track usage and improve the app. Feel free to disable it if you prefer not to share any data. https://support.google.com/chrome/answer/2790761?hl=en&co=GENIE.Platform%3DDesktop"
-);
+
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0];
+const auth = getAuth(app);
+
+let analytics: ReturnType<typeof getAnalytics> | undefined = undefined;
+
 // Only init analytics if running in the browser
 if (typeof window !== "undefined") {
   isSupported()
     .then((supported) => {
       if (supported) {
         try {
+          console.log(
+            "I've got some analytics because I want to track usage and improve the app. Feel free to disable it if you prefer not to share any data. https://support.google.com/chrome/answer/2790761?hl=en&co=GENIE.Platform%3DDesktop"
+          );
           analytics = getAnalytics(app);
           console.log("✅ Analytics loaded.");
         } catch (e) {
@@ -48,4 +58,18 @@ if (typeof window !== "undefined") {
     });
 }
 
-export { app, analytics };
+if (typeof window !== "undefined" && location.hostname === "localhost") {
+  console.log("Connecting to Firebase Emulators...");
+  connectAuthEmulator(auth, "http://localhost:9099");
+}
+
+export {
+  app,
+  analytics,
+  auth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
+  signOut,
+};

@@ -81,6 +81,8 @@ import type { StaticImageData } from "next/image";
 import { Tabs, TabsContent, TabsTrigger } from "./ui/tabs";
 import { TabsList } from "@radix-ui/react-tabs";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/use-auth";
+import { Spinner } from "@/components/spinner";
 
 type Photo = {
   index?: number;
@@ -588,8 +590,35 @@ const photoRepository = [
 ] as Photo[];
 
 export default function GallerySection() {
+  const { user, loading } = useAuth();
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("archives");
+
+  if (loading)
+    return (
+      <div className="max-w-2xl h-screen mx-auto mt-8 justify-center items-center flex">
+        <Spinner />
+      </div>
+    );
+
+  if (!user) {
+    return (
+      <div className="max-w-2xl mx-auto mt-8 text-center">
+        <p className="text-lg mb-4">
+          Please log in to view the gallery. We have some awesome photos to
+          share with you!
+        </p>
+        <p className="text-sm text-white">
+          If you don’t have an account, please{" "}
+          <a href="/register" className="text-chart-3 hover:underline">
+            register here
+          </a>
+          .
+        </p>
+      </div>
+    );
+  }
+
   const categories = photoRepository
     .map((photo) => photo.category)
     .filter((value, index, self) => {
