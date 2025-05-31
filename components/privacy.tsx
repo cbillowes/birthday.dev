@@ -11,7 +11,7 @@ export function PrivacyPolicy() {
         onClick={() => setShowPrivacy(!showPrivacy)}
       >
         <span className="text-xl">💁</span>
-        {showPrivacy ? "Hide" : "Display"} privacy policy
+        {showPrivacy ? "Un-see" : "See"} privacy policy
       </div>
       {showPrivacy && (
         <div className="mt-1 text-sm text-white/60 leading-relaxed bg-black/60 p-4 rounded-md mb-4 flex flex-col gap-2">
