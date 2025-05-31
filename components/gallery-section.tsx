@@ -605,12 +605,13 @@ export default function GallerySection() {
     return (
       <div className="max-w-2xl mx-auto mt-8 text-center">
         <p className="text-lg mb-4">
-          Please log in to view the gallery. We have some awesome photos to
-          share with you!
+          Please log in to view the gallery. There are some awesome memories I
+          want to share with you! Please feel free to send me more so I can add
+          them to the gallery.
         </p>
         <p className="text-sm text-white">
-          If you don’t have an account, please{" "}
-          <a href="/register" className="text-chart-3 hover:underline">
+          If you don’t have an account, you can{" "}
+          <a href="/register" className="text-chart-3 hover:underline font-bold">
             register here
           </a>
           .
