@@ -16,8 +16,16 @@ export default function LoginPage() {
           <h1 className="text-3xl md:text-4xl font-bold mb-4">Login</h1>
           <div className="w-20 h-1 bg-chart-5 mx-auto mb-6"></div>
           <p className="max-w-2xl mx-auto">
-            Log in to access your account, RSVP, manage your booking and access
-            exclusive content.
+            Log in to gain exclusive access to the event details, the photo
+            gallery of memorable moments, event updates and much more! If you
+            have not registered yet, please{" "}
+            <a
+              href="/register"
+              className="text-chart-5 hover:text-chart5/50 focus:ring-white/50 font-bold hover:underline focus:underline"
+            >
+              register here
+            </a>
+            .
           </p>
         </motion.div>
         <div className="mt-4 max-w-2xl mx-auto text-center animate-fadeIn">
