@@ -9,7 +9,10 @@ import { loginUser } from "@/components/login/service";
 import { UserType, userSchema } from "@/components/login/schema";
 import { cn } from "@/lib/utils";
 
-const LoginForm: React.FC<{ hideHeader?: boolean; buttonClassName?: string }> = ({
+const LoginForm: React.FC<{
+  hideHeader?: boolean;
+  buttonClassName?: string;
+}> = ({
   hideHeader = false,
   buttonClassName = "bg-chart-5 hover:bg-chart5/50 focus:ring-chart-5",
 }) => {
@@ -42,7 +45,7 @@ const LoginForm: React.FC<{ hideHeader?: boolean; buttonClassName?: string }> = 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="p-6 border-white/10 bg-black/40 rounded-lg shadow-sm border animate-fadeIn text-left">
           {hideHeader === false && (
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -50,10 +53,11 @@ const LoginForm: React.FC<{ hideHeader?: boolean; buttonClassName?: string }> = 
                 className="text-center flex justify-center items-center space-x-2 mx-auto"
               >
                 <div>
-                  <h3 className="text-lg font-medium">Login</h3>
+                  <h3 className="text-lg font-medium mb-1">Login</h3>
                   <p>
-                    Log in to manage your booking and share cool stuff with me.
-                    If you don’t want to, you can message directly.
+                    Log in to gain exclusive access to the event details, the
+                    photo gallery of memorable moments, event updates and much
+                    more!
                   </p>
                 </div>
               </motion.div>
@@ -93,7 +97,8 @@ const LoginForm: React.FC<{ hideHeader?: boolean; buttonClassName?: string }> = 
             <button
               type="submit"
               disabled={isSubmitting}
-              className={cn(`mt-4 w-full py-3 px-4 rounded-md text-white font-medium transition-colors focus:outline-none focus:ring-opacity-50 flex items-center justify-center`,
+              className={cn(
+                `mt-4 w-full py-3 px-4 rounded-md text-white font-medium transition-colors focus:outline-none focus:ring-opacity-50 flex items-center justify-center`,
                 buttonClassName
               )}
             >

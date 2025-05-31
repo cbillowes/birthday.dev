@@ -47,7 +47,7 @@ export default function ManagePage() {
 
   if (loading) return <Loading />;
 
-  if (!!user) {
+  if (!user) {
     return (
       <div className="container py-16 md:py-24">
         <motion.div
@@ -60,6 +60,10 @@ export default function ManagePage() {
             Manage Your Booking
           </h1>
           <div className="w-20 h-1 bg-chart-4 mx-auto mb-6"></div>
+          <p className="max-w-2xl mx-auto">
+            This section requires access to the website. Please log in or
+            register if you have not done so yet.
+          </p>
         </motion.div>
 
         <div className="max-w-2xl mx-auto">
@@ -67,13 +71,13 @@ export default function ManagePage() {
             <TabsList className="grid w-full grid-cols-1 md:grid-cols-2 h-auto bg-transparent gap-2">
               <TabsTrigger
                 value="login"
-                className="py-3 bg-black/40 data-[state=active]:bg-chart-4 data-[state=active]:text-black"
+                className="py-3 bg-black/40 data-[state=active]:bg-chart-4/10 data-[state=active]:text-chart-4"
               >
                 Log in
               </TabsTrigger>
               <TabsTrigger
                 value="register"
-                className="py-3 bg-black/40 data-[state=active]:bg-chart-4 data-[state=active]:text-black"
+                className="py-3 bg-black/40 data-[state=active]:bg-chart-4/10 data-[state=active]:text-chart-4"
               >
                 Register
               </TabsTrigger>

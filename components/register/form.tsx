@@ -65,11 +65,12 @@ const RegisterForm: React.FC<{
                 className="text-center flex justify-center items-center space-x-2 mx-auto"
               >
                 <div>
-                  <h3 className="text-lg font-medium">Register an account</h3>
+                  <h3 className="text-lg font-medium mb-1">Register</h3>
                   <p>
-                    Register to RSVP, manage your booking and share cool stuff
-                    with me. If you don’t want to, you can message directly to
-                    update your booking.
+                    You will gain exclusive access to the event details, the
+                    photo gallery of memorable moments, event updates and much
+                    more! If you don’t want to, you can message directly to book
+                    your spot.
                   </p>
                 </div>
               </motion.div>
