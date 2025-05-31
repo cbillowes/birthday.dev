@@ -6,8 +6,8 @@ export const registerUser = async ({
   password,
 }: UserType) => {
   const userRecord = await auth.createUser({
-    email,
-    password,
+    email: email.trim(),
+    password: password.trim(),
   });
   return userRecord;
 };
