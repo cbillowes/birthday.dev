@@ -4,9 +4,11 @@ import { ErrorToast } from "@/components/error-toast";
 import { Loading } from "@/components/loading";
 import GuestForm from "@/components/rsvp/form";
 import { BookingType } from "@/components/rsvp/schema";
-import { getBookingByRef } from "@/components/rsvp/service";
+import { cancelBooking, getBookingByRef } from "@/components/rsvp/service";
+import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/use-auth";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -39,6 +41,21 @@ export default function PortalManagementPage() {
 
   if (loading) return <Loading />;
 
+  const cancel = async () => {
+    if (!user || !booking) return;
+    try {
+      const saved = await cancelBooking(user, booking);
+      if (saved) {
+        router.push("/portal");
+      } else {
+        setErrorMessage("Failed to cancel booking. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error canceling booking:", error);
+      setErrorMessage("Failed to cancel booking. Please try again later.");
+    }
+  };
+
   return (
     <div className="container py-16 md:py-24">
       <motion.div
@@ -50,9 +67,20 @@ export default function PortalManagementPage() {
         <h1 className="text-3xl md:text-4xl font-bold mb-2">Manage Booking</h1>
         <div className="w-20 h-1 bg-chart-1 mx-auto mb-6"></div>
         <p>
-          <a href="/portal" className="underline">
-            Back to portal
-          </a>
+          <Button
+            className="mt-2 bg-red-700 text-white hover:bg-red-800"
+            onClick={cancel}
+          >
+            Cancel Booking
+          </Button>
+          <Button asChild>
+            <Link
+              href="/portal"
+              className="ml-4 bg-white text-black hover:bg-chart-5"
+            >
+              Back to Portal
+            </Link>
+          </Button>
         </p>
       </motion.div>
       <GuestForm data={booking} redirectTo="/portal" />

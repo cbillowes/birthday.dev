@@ -3,7 +3,7 @@ import { db, stripUndefined } from "@/firebase/config";
 import { DecodedIdToken } from "firebase-admin/auth";
 
 export const saveBooking = async (
-  { ref, guests }: BookingType,
+  { ref, cancelled, guests }: BookingType,
   user: DecodedIdToken
 ) => {
   const bookingRef = ref || user.uid;
@@ -30,6 +30,7 @@ export const saveBooking = async (
           confirmed: false,
         })
       ),
+      cancelled: cancelled || false,
       modifiedAt: new Date().getTime(),
       modifiedBy: user.email || user.uid,
     });

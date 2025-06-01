@@ -5,15 +5,18 @@ import { motion } from "framer-motion";
 import { FirebaseProvider } from "@/providers/firebase";
 import { useAuth } from "@/hooks/use-auth";
 import { Loading } from "@/components/loading";
-import { getBooking } from "@/components/rsvp/service";
+import { cancelBooking, getBooking } from "@/components/rsvp/service";
 import { BookingType } from "@/components/rsvp/schema";
 import GuestForm from "@/components/rsvp/form";
+import { Button } from "@/components/ui/button";
+import { ErrorToast } from "@/components/error-toast";
 
 export default function ManagePage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [booking, setBooking] = useState<BookingType>();
   const [loadingBooking, setLoadingBooking] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user && !loading) {
@@ -36,6 +39,21 @@ export default function ManagePage() {
 
   if (loading || loadingBooking) return <Loading />;
 
+  const cancel = async () => {
+    if (!user || !booking) return;
+    try {
+      const saved = await cancelBooking(user, booking);
+      if (saved) {
+        router.push("/dashboard");
+      } else {
+        setErrorMessage("Failed to cancel booking. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error canceling booking:", error);
+      setErrorMessage("Failed to cancel booking. Please try again later.");
+    }
+  };
+
   return (
     <FirebaseProvider>
       <div className="container py-16 md:py-24">
@@ -54,11 +72,29 @@ export default function ManagePage() {
             state. You will receive a new confirmation message from me, should
             their be enough space available.
           </p>
+          {booking && !booking.cancelled && (
+            <>
+              <p className="mt-2">
+                If you can no longer make it, you can cancel your entire
+                booking. You can always come back if you can make it again.
+              </p>
+              <Button
+                className="mt-2 bg-red-700 text-white hover:bg-red-800"
+                onClick={cancel}
+              >
+                Cancel Booking
+              </Button>
+            </>
+          )}
         </motion.div>
         <section className="max-w-7xl mx-auto mb-4">
           <GuestForm data={booking} />
         </section>
       </div>
+      <ErrorToast
+        message={errorMessage}
+        onClose={() => setErrorMessage(null)}
+      />
     </FirebaseProvider>
   );
 }

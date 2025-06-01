@@ -12,11 +12,12 @@ import { Loading } from "@/components/loading";
 import { getBooking } from "@/components/rsvp/service";
 import CountdownTimer from "@/components/countdown-timer";
 import { EventDetails } from "@/components/event-details";
+import { BookingType } from "@/components/rsvp/schema";
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const [hasBooking, setHasBooking] = useState(false);
+  const [booking, setBooking] = useState<BookingType | null>(null);
 
   useEffect(() => {
     if (!user && !loading) {
@@ -27,9 +28,9 @@ export default function DashboardPage() {
       try {
         if (!user) return;
         const booking = await getBooking(user);
-        setHasBooking(booking !== null);
+        setBooking(booking);
       } catch (error) {
-        setHasBooking(false);
+        setBooking(null);
       }
     };
     checkBooking();
@@ -58,7 +59,7 @@ export default function DashboardPage() {
         </div>
         <section id="details" className="max-w-7xl mx-auto mb-4">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            {!hasBooking && (
+            {!booking && (
               <Card className="bg-card/50 backdrop-blur-sm border-border/50">
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center justify-end text-center">
@@ -80,7 +81,7 @@ export default function DashboardPage() {
                 </CardContent>
               </Card>
             )}
-            {hasBooking && (
+            {booking && (
               <Card className="bg-card/50 backdrop-blur-sm border-border/50">
                 <CardContent className="pt-6">
                   <div className="flex flex-col items-center justify-end text-center">
@@ -91,7 +92,15 @@ export default function DashboardPage() {
                       Manage your Booking
                     </h3>
                     <p className="text-muted-foreground mb-2">
-                      You do not currently have a booking.
+                      {booking.cancelled && (
+                        <div>Your booking has been cancelled.</div>
+                      )}
+                      {booking.confirmedAt && (
+                        <div>Your booking has been confirmed.</div>
+                      )}
+                      {!booking.cancelled && !booking.confirmedAt && (
+                        <div>Your booking is pending.</div>
+                      )}
                     </p>
                     <GhostLinkButton
                       to="/manage"

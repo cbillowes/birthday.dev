@@ -16,6 +16,8 @@ export type GuestType = z.infer<typeof guestSchema>;
 
 export const bookingTypeSchema = z.object({
   ref: z.string().optional(),
+  cancelled: z.boolean().optional(),
+  confirmedAt: z.any().optional(),
   guests: z
     .array(guestSchema)
     .min(1, { message: "At least one guest is required for your booking." }),
@@ -33,6 +35,7 @@ export const bookingEntitySchema = z.object({
   modifiedBy: z.string().optional(),
   confirmedAt: z.number().optional(),
   confirmedBy: z.string().optional(),
+  cancelled: z.boolean().optional(),
   notes: z.string().optional(),
 });
 

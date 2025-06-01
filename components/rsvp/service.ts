@@ -1,10 +1,7 @@
 import { User } from "firebase/auth";
 import { BookingType, BookingEntityType } from "@/components/rsvp/schema";
 
-export const saveBooking = async (
-  user: User,
-  booking: BookingType
-) => {
+export const saveBooking = async (user: User, booking: BookingType) => {
   const token = await user.getIdToken();
   const response = await fetch("/.netlify/functions/rsvp", {
     method: "POST",
@@ -12,7 +9,20 @@ export const saveBooking = async (
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(booking),
+    body: JSON.stringify({ ...booking, cancelled: false, confirmedAt: null }),
+  });
+  return response.ok;
+};
+
+export const cancelBooking = async (user: User, booking: BookingType) => {
+  const token = await user.getIdToken();
+  const response = await fetch("/.netlify/functions/rsvp", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ ...booking, cancelled: true }),
   });
   return response.ok;
 };

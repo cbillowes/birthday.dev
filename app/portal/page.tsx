@@ -132,6 +132,7 @@ export default function PortalPage() {
                     ref,
                     guests,
                     notes,
+                    cancelled,
                     createdAt,
                     createdBy,
                     modifiedAt,
@@ -144,7 +145,8 @@ export default function PortalPage() {
                       key={`summary-row-${i}-${j}`}
                       className={cn(
                         "border-t border-white/20",
-                        confirmedAt ? "text-green-400" : "text-white/90"
+                        confirmedAt ? "text-green-400" : "text-white/90",
+                        cancelled ? "text-red-400" : ""
                       )}
                     >
                       <td className="px-4 py-2 whitespace-nowrap">
