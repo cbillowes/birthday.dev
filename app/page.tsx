@@ -50,7 +50,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
               {user && (
                 <PrimaryLinkButton size="lg" to="/dashboard">
-                  Dashboard
+                  My Dashboard
                 </PrimaryLinkButton>
               )}
               {!user && (
