@@ -1,4 +1,4 @@
-import { saveRsvp } from "@/components/rsvp/db";
+import { saveBooking } from "@/components/rsvp/db";
 import { auth } from "@/firebase/config";
 import { Handler } from "@netlify/functions";
 
@@ -18,7 +18,7 @@ const handler: Handler = async (event, context) => {
         body: JSON.stringify({ message: "Could not authenticate user." }),
       };
     }
-    await saveRsvp(user.uid, JSON.parse(event.body));
+    await saveBooking(user.uid, JSON.parse(event.body));
     return {
       statusCode: 200,
     };

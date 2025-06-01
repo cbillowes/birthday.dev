@@ -4,14 +4,14 @@ import { useAuth } from "@/hooks/use-auth";
 import { Loading } from "@/components/loading";
 import GuestForm from "@/components/rsvp/form";
 import { useEffect, useState } from "react";
-import { GuestListType } from "@/components/rsvp/schema";
-import { getRsvp } from "@/components/rsvp/service";
+import { BookingType } from "@/components/rsvp/schema";
+import { getBooking } from "@/components/rsvp/service";
 import { useRouter } from "next/navigation";
 
 export default function RsvpPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
-  const [booking, setBooking] = useState<GuestListType>();
+  const [booking, setBooking] = useState<BookingType>();
 
   useEffect(() => {
     if (loading) return;
@@ -24,7 +24,7 @@ export default function RsvpPage() {
     const checkBooking = async () => {
       try {
         if (!user) return;
-        const booking = await getRsvp(user);
+        const booking = await getBooking(user);
         setBooking(booking);
       } catch (error) {
       }

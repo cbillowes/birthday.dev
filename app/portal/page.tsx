@@ -1,7 +1,7 @@
 "use client";
 import { ErrorToast } from "@/components/error-toast";
 import { Loading } from "@/components/loading";
-import { RsvpType } from "@/components/rsvp/schema";
+import { BookingEntityType } from "@/components/rsvp/schema";
 import { getBookings } from "@/components/rsvp/service";
 import { useAuth } from "@/hooks/use-auth";
 import { FirebaseProvider } from "@/providers/firebase";
@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 export default function PortalPage() {
   const { user, loading } = useAuth();
-  const [bookings, setBookings] = useState<RsvpType[]>([]);
+  const [bookings, setBookings] = useState<BookingEntityType[]>([]);
   const [totalGuests, setTotalGuests] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
@@ -56,8 +56,67 @@ export default function PortalPage() {
             {bookings.length} booking(s) and {totalGuests} guest(s) in total.
           </p>
         </motion.div>
-        <section className="max-w-7xl mx-auto mb-4">
-          {bookings.map(({ bookingName, guests, createdAt }, index) => (
+        <section className="max-w-7xl mx-auto mb-4 overflow-scroll">
+          <table className="w-full text-left border-collapse bg-black/20 border-white/20 border">
+            <thead>
+              <tr className="bg-black/50">
+                <th>&nbsp;</th>
+                <th className="px-4 py-2 text-white/70">Name</th>
+                <th className="px-4 py-2 text-white/70">Number</th>
+                <th className="px-4 py-2 text-white/70">WhatsApp?</th>
+                <th className="px-4 py-2 text-white/70 whitespace-nowrap">Est. Time</th>
+                <th className="px-4 py-2 text-white/70">Comments</th>
+                <th className="px-4 py-2 text-white/70">Created</th>
+                <th className="px-4 py-2 text-white/70">Modified</th>
+              </tr>
+            </thead>
+            <tbody>
+              {bookings.map(({ guests, createdAt, modifiedAt }, i) => {
+                return guests?.map((guest, j) => (
+                  <tr
+                    key={`summary-row-${i}-${j}`}
+                    className="border-t border-white/20"
+                  >
+                    <td className="px-4 py-2 text-white/70">
+                      {i + 1}.{j + 1}
+                    </td>
+                    <td className="px-4 py-2 text-white/90 whitespace-nowrap">{guest.name}</td>
+                    <td className="px-4 py-2 text-white/90 whitespace-nowrap">{guest.phone}</td>
+                    <td className="px-4 py-2 text-white/90">
+                      {guest.consentForWhatsApp ? "Yes" : "No"}
+                    </td>
+                    <td className="px-4 py-2 text-white/90">
+                      {guest.expectedTime}
+                    </td>
+                    <td className="px-4 py-2 text-white/90">
+                      {guest.requests || "No comments"}
+                    </td>
+                    <td className="px-4 py-2 text-white/90 whitespace-nowrap">
+                      {new Date(createdAt).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </td>
+                    <td className="px-4 py-2 text-white/90 whitespace-nowrap">
+                      {modifiedAt
+                        ? new Date(modifiedAt).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })
+                        : "N/A"}
+                    </td>
+                  </tr>
+                ));
+              })}
+            </tbody>
+          </table>
+          {/* {bookings.map(({ guests, createdAt }, index) => (
             <div key={bookingName} className="mb-2">
               <h2 className="text-lg font-bold flex flex-col md:flex-row justify-between bg-black/50 px-4 py-2 border border-white/20">
                 <span>
@@ -82,6 +141,7 @@ export default function PortalPage() {
                       <th className="px-4 py-2 text-white/70">
                         WhatsApp Group?
                       </th>
+                      <th className="px-4 py-2 text-white/70">Est. Time</th>
                       <th className="px-4 py-2 text-white/70">Comments</th>
                     </tr>
                   </thead>
@@ -101,6 +161,9 @@ export default function PortalPage() {
                           {guest.consentForWhatsApp ? "Yes" : "No"}
                         </td>
                         <td className="px-4 py-2 text-white/90">
+                          {guest.expectedTime}
+                        </td>
+                        <td className="px-4 py-2 text-white/90">
                           {guest.requests || "No comments"}
                         </td>
                       </tr>
@@ -109,7 +172,7 @@ export default function PortalPage() {
                 </table>
               </div>
             </div>
-          ))}
+          ))} */}
         </section>
       </div>
       <ErrorToast

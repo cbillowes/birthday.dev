@@ -2,34 +2,32 @@ import React, { ReactNode } from "react";
 import { motion } from "framer-motion";
 import { UseFormReturn } from "react-hook-form";
 import { Plus, Trash2 } from "lucide-react";
-import { GuestListType } from "./schema";
+import { BookingType } from "./schema";
 import { Checkbox } from "../ui/checkbox";
 import { ErrorMessage } from "../error-message";
 
 interface GuestListProps {
-  form: UseFormReturn<GuestListType>;
+  form: UseFormReturn<BookingType>;
 }
 
 const GuestList: React.FC<GuestListProps> = ({ form }) => {
-  const [showBookingInfo, setShowBookingInfo] = React.useState(false);
-
   const {
     register,
     formState: { errors },
     watch,
     setValue,
   } = form;
-  const bookingName = watch("bookingName") || "";
-  const guests = watch("guests") || [];
+  const guests = watch("guests");
 
   const addGuest = () => {
     setValue("guests", [
       ...guests,
       {
-        name: guests.length === 0 ? bookingName : "",
+        name: "",
         phone: "",
         requests: "",
         consentForWhatsApp: false,
+        expectedTime: "16h30",
       },
     ]);
   };
@@ -43,7 +41,7 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
     <>
       <p>
         The guest list will be finalised closer to the event. You’re welcome to
-        bring your partner or friends, but please keep the number of guests
+        bring your partner or a few friends, but please keep the number of guests
         reasonable as space is limited. Bookings are not automatically confirmed
         — I’ll get in touch with you to confirm your spot.
       </p>
@@ -51,52 +49,6 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
       <div className="mt-8">
         <div className="space-y-6">
           <div className="space-y-4">
-            <div>
-              <label
-                htmlFor="booking-name"
-                className="block text-white/90 mb-1"
-              >
-                <button
-                  type="button"
-                  className="mr-2"
-                  onClick={() => setShowBookingInfo(!showBookingInfo)}
-                >
-                  ℹ️
-                </button>{" "}
-                <span className="font-semibold">Booking name</span>{" "}
-                <i>(your name and surname)</i>.
-              </label>
-              {showBookingInfo && (
-                <p className="text-sm font-light text-white/60 mb-2 leading-relaxed">
-                  This information is shared with the venue. Your booking name
-                  and the number of guests you’re bringing will be on the guest
-                  list at the door. Ask for the table booked under Clarice
-                  Bouwer.
-                </p>
-              )}
-              <input
-                id="booking-name"
-                {...register(`bookingName`, {
-                  required: "Booking name is required",
-                })}
-                className="w-full px-3 py-2 bg-black/30 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent border-l-red-400 border-l-8"
-              />
-              <ErrorMessage>{errors.bookingName?.message}</ErrorMessage>
-            </div>
-            <div>
-              <div className="text-white/90 mb-1 font-semibold">
-                Guests
-              </div>
-              {guests.length === 0 && (
-                <p className="text-sm font-light text-white/60 mb-2 leading-relaxed">
-                  Ready, set, go! Add yourself and the people who do not want to
-                  register that you would like to bring along.
-                </p>
-              )}
-              {errors.guests?.root?.message && (
-                <ErrorMessage>{errors.guests.root.message}</ErrorMessage>
-              )}
-            </div>
             {guests.map((_, index) => (
               <div
                 key={`guest-${index}`}
@@ -193,12 +145,38 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
                       <i>(optional)</i>
                     </label>
                     <textarea
-                      rows={5}
-                      placeholder="Have anything to say? Perhaps you have special requests or even suggestions for me. Also, note that the full menu is available so no need to worry about dietary restrictions. The menu will be shared when it is made available by the venue."
+                      rows={4}
+                      placeholder="Have anything to say? Note that a full menu is available so no need to worry about dietary requirements. The menu will be shared soon."
                       id={`guests.${index}.requests`}
                       {...register(`guests.${index}.requests`)}
                       className="w-full px-3 py-2 bg-black/30 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor={`guests.${index}.name`}
+                      className="block text-white/80 mb-1"
+                    >
+                      <span className="font-semibold">
+                        Expected time of arrival
+                      </span>{" "}
+                      <i>(you can change this later)</i>
+                    </label>
+                    <p className="mb-1 text-sm text-white/80">
+                      We start at 16h30 and will leave when the venue boots us
+                      out.
+                    </p>
+                    <input
+                      id={`guests.${index}.expectedTime`}
+                      {...register(`guests.${index}.expectedTime`)}
+                      className="w-full px-3 py-2 bg-black/30 border border-white/20 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent border-l-red-400 border-l-8"
+                      placeholder="16h30"
+                    />
+                    <ErrorMessage>
+                      {errors.guests &&
+                        errors.guests[index]?.expectedTime?.message}
+                    </ErrorMessage>
                   </div>
                 </div>
               </div>
@@ -208,7 +186,8 @@ const GuestList: React.FC<GuestListProps> = ({ form }) => {
           <button
             type="button"
             onClick={addGuest}
-            className="flex items-center justify-center w-full py-3 px-4 text-gray-800 rounded-md hover:bg-pink-600 hover:text-pink-50 transition-colors border-white bg-white"
+            disabled={guests.length === 4}
+            className="flex items-center justify-center w-full py-3 px-4 text-gray-800 rounded-md hover:bg-pink-600 hover:text-pink-50 transition-colors border-white bg-white disabled:bg-muted/20 disabled:text-white/50 disabled:cursor-not-allowed"
           >
             <Plus size={18} className="mr-2" />
             Add a guest

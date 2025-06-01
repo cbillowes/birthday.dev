@@ -1,33 +1,33 @@
 import { z } from "zod";
 
 export const guestSchema = z.object({
-  name: z.string().min(2, { message: "Please share a name." }),
+  name: z.string().min(2, { message: "Name and surname is required." }),
   phone: z.string().regex(/^\+?[0-9]{10,15}$/, {
-    message: "Is this a valid number?",
+    message: "WhatsApp number required. Remember to include your country code.",
   }),
   requests: z.string().optional(),
   consentForWhatsApp: z.boolean(),
+  expectedTime: z.string().regex(/^[0-2][0-9]h[0-9][0-9]$/, {
+    message: "Enter a time in the format like 16h30.",
+  }),
 });
 
 export type GuestType = z.infer<typeof guestSchema>;
 
-export const guestListSchema = z.object({
-  bookingName: z
-    .string()
-    .min(2, { message: "The name and surname the booking will be saved as." }),
+export const bookingTypeSchema = z.object({
   guests: z
     .array(guestSchema)
     .min(1, { message: "At least one guest is required for your booking." }),
 });
 
-export type GuestListType = z.infer<typeof guestListSchema>;
+export type BookingType = z.infer<typeof bookingTypeSchema>;
 
-export const rsvpSchema = z.object({
-  bookingName: z.string(),
+export const bookingEntitySchema = z.object({
   ref: z.string(),
   guests: z.array(guestSchema),
   userId: z.string(),
   createdAt: z.number(),
+  modifiedAt: z.number().optional(),
 });
 
-export type RsvpType = z.infer<typeof rsvpSchema>;
+export type BookingEntityType = z.infer<typeof bookingEntitySchema>;

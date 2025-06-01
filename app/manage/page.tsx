@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 import { FirebaseProvider } from "@/providers/firebase";
 import { useAuth } from "@/hooks/use-auth";
 import { Loading } from "@/components/loading";
-import { getRsvp } from "@/components/rsvp/service";
-import { GuestListType } from "@/components/rsvp/schema";
+import { getBooking } from "@/components/rsvp/service";
+import { BookingType } from "@/components/rsvp/schema";
 import GuestForm from "@/components/rsvp/form";
 
 export default function ManagePage() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const [booking, setBooking] = useState<GuestListType>();
+  const [booking, setBooking] = useState<BookingType>();
 
   useEffect(() => {
     if (!user && !loading) {
@@ -23,7 +23,7 @@ export default function ManagePage() {
     const checkBooking = async () => {
       try {
         if (!user) return;
-        const booking = await getRsvp(user);
+        const booking = await getBooking(user);
         setBooking(booking);
       } catch (error) {
       }

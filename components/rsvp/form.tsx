@@ -2,24 +2,35 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { GuestListType, guestListSchema } from "./schema";
+import { BookingType, bookingTypeSchema } from "./schema";
 import GuestList from "./list";
-import { saveRsvp } from "./service";
+import { saveBooking } from "./service";
 import { Spinner } from "@/components/spinner";
 import { useAuth } from "@/hooks/use-auth";
 import { PrivacyPolicy } from "@/components/privacy";
 import { ErrorToast } from "@/components/error-toast";
 
 const GuestForm: React.FC<{
-  data?: GuestListType;
+  data?: BookingType;
 }> = ({ data }) => {
   const [mounted, setMounted] = useState(false);
   const { user } = useAuth();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
 
-  const form = useForm<GuestListType>({
-    resolver: zodResolver(guestListSchema),
+  const form = useForm<BookingType>({
+    resolver: zodResolver(bookingTypeSchema),
+    defaultValues: {
+      guests: data?.guests || [
+        {
+          name: "",
+          phone: "",
+          requests: "",
+          consentForWhatsApp: false,
+          expectedTime: "16h30",
+        },
+      ],
+    },
     mode: "onBlur",
     reValidateMode: "onBlur",
     criteriaMode: "all",
@@ -40,13 +51,13 @@ const GuestForm: React.FC<{
     }
   }, [mounted, data, reset]);
 
-  const onSubmit = async (data: GuestListType) => {
+  const onSubmit = async (data: BookingType) => {
     if (!user) {
       setErrorMessage("You must be logged in to save your booking.");
       return;
     }
     try {
-      const saved = await saveRsvp(user, data);
+      const saved = await saveBooking(user, data);
       if (saved) {
         router.push("/thank-you");
       } else {

@@ -9,7 +9,7 @@ import { PartyDetails } from "@/components/party-details";
 import { Card, CardContent } from "@/components/ui/card";
 import { GhostLinkButton } from "@/components/link-button";
 import { Loading } from "@/components/loading";
-import { getRsvp } from "@/components/rsvp/service";
+import { getBooking } from "@/components/rsvp/service";
 import CountdownTimer from "@/components/countdown-timer";
 
 export default function DashboardPage() {
@@ -25,7 +25,7 @@ export default function DashboardPage() {
     const checkBooking = async () => {
       try {
         if (!user) return;
-        const booking = await getRsvp(user);
+        const booking = await getBooking(user);
         setHasBooking(booking !== null);
       } catch (error) {
         setHasBooking(false);

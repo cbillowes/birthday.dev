@@ -1,7 +1,7 @@
 import { User } from "firebase/auth";
-import { GuestListType, RsvpType } from "@/components/rsvp/schema";
+import { BookingType, BookingEntityType } from "@/components/rsvp/schema";
 
-export const saveRsvp = async (user: User, data: GuestListType) => {
+export const saveBooking = async (user: User, data: BookingType) => {
   const token = await user.getIdToken();
   const response = await fetch("/.netlify/functions/rsvp", {
     method: "POST",
@@ -14,7 +14,7 @@ export const saveRsvp = async (user: User, data: GuestListType) => {
   return response.ok;
 };
 
-export const getRsvp = async (user: User) => {
+export const getBooking = async (user: User) => {
   const token = await user.getIdToken();
   const response = await fetch("/.netlify/functions/booking", {
     method: "GET",
@@ -25,7 +25,7 @@ export const getRsvp = async (user: User) => {
   if (!response.ok) {
     throw new Error("Failed to fetch booking data.");
   }
-  return response.json() as Promise<GuestListType>;
+  return response.json() as Promise<BookingType>;
 };
 
 export const getBookings = async (user: User) => {
@@ -39,5 +39,5 @@ export const getBookings = async (user: User) => {
   if (!response.ok) {
     throw new Error("Failed to fetch bookings.");
   }
-  return response.json() as Promise<RsvpType[]>;
+  return response.json() as Promise<BookingEntityType[]>;
 };
