@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 export default function RsvpPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
+  const [loadingBooking, setLoadingBooking] = useState(true);
   const [booking, setBooking] = useState<BookingType>();
 
   useEffect(() => {
@@ -27,12 +28,14 @@ export default function RsvpPage() {
         const booking = await getBooking(user);
         setBooking(booking);
       } catch (error) {
+      } finally {
+        setLoadingBooking(false);
       }
     };
     checkBooking();
   }, [user, loading, router]);
 
-  if (loading) return <Loading />;
+  if (loading || loadingBooking) return <Loading />;
 
   return (
     <div className="container py-16 md:py-24">

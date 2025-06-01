@@ -13,6 +13,7 @@ export default function ManagePage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [booking, setBooking] = useState<BookingType>();
+  const [loadingBooking, setLoadingBooking] = useState(true);
 
   useEffect(() => {
     if (!user && !loading) {
@@ -25,12 +26,15 @@ export default function ManagePage() {
         if (!user) return;
         const booking = await getBooking(user);
         setBooking(booking);
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setLoadingBooking(false);
+      }
     };
     checkBooking();
   }, [user, loading, router]);
 
-  if (loading) return <Loading />;
+  if (loading || loadingBooking) return <Loading />;
 
   return (
     <FirebaseProvider>
