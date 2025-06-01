@@ -63,14 +63,6 @@ export default function Footer() {
               )}
               <li>
                 <Link
-                  href="/manage"
-                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                >
-                  Manage Booking
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/login"
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
@@ -104,7 +96,11 @@ export default function Footer() {
                 </li>
               </ul>
             )}
-            {!user && <div>Log in to see contact info</div>}
+            {!user && (
+              <div className="text-muted-foreground">
+                Log in to see contact info
+              </div>
+            )}
           </div>
         </div>
 

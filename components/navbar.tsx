@@ -31,14 +31,9 @@ export default function Navbar() {
   const navItems = [
     { href: "/", label: "Home", show: true },
     { href: "/gallery", label: "Gallery", show: true },
-    { href: "/register", label: "Register", show: !user },
+    { href: "/rsvp", label: "Book your Spot", show: !!user },
     { href: "/dashboard", label: "My Dashboard", show: !!user },
-    {
-      href: "/manage",
-      label: "Manage Booking",
-      show: true,
-    },
-    { label: "Login", href: "/login", show: !user },
+    { href: "/login", label: "Login", show: !user },
     {
       onClick: handleLogout,
       label: "Logout",
@@ -74,12 +69,22 @@ export default function Navbar() {
                   </Link>
                 )
             )}
-            <Button
-              asChild
-              className="bg-chart-5 hover:bg-chart-2/90 text-white"
-            >
-              <Link href="/rsvp">Book your Spot</Link>
-            </Button>
+            {user && (
+              <Button
+                asChild
+                className="bg-chart-5 hover:bg-chart-2/90 text-white"
+              >
+                <Link href="/manage">Manage your Booking</Link>
+              </Button>
+            )}
+            {!user && (
+              <Button
+                asChild
+                className="bg-chart-5 hover:bg-chart-2/90 text-white"
+              >
+                <Link href="/register">Book your Spot</Link>
+              </Button>
+            )}
           </nav>
         )}
 
@@ -130,13 +135,24 @@ export default function Navbar() {
                     </Link>
                   )
               )}
-              <Button
-                asChild
-                className="w-full bg-chart-5 hover:bg-chart-5/90 text-white"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                <Link href="/rsvp">Book your Spot</Link>
-              </Button>
+              {user && (
+                <Button
+                  asChild
+                  className="bg-chart-5 hover:bg-chart-2/90 text-white"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Link href="/manage">Manage your Booking</Link>
+                </Button>
+              )}
+              {!user && (
+                <Button
+                  asChild
+                  className="bg-chart-5 hover:bg-chart-2/90 text-white"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Link href="/register">Book your Spot</Link>
+                </Button>
+              )}
             </div>
           </motion.div>
         )}
