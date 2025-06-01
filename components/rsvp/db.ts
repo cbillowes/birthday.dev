@@ -118,7 +118,6 @@ export const manageBooking = async (
     modifiedAt: new Date().getTime(),
     modifiedBy: user.email || user.uid,
   });
-  console.log(updatedBooking);
   await db
     .collection("guests")
     .doc(booking.ref)
