@@ -25,8 +25,7 @@ export default function ManagePage() {
         if (!user) return;
         const booking = await getBooking(user);
         setBooking(booking);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
     checkBooking();
   }, [user, loading, router]);
@@ -40,12 +39,17 @@ export default function ManagePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="max-w-2xl text-center mb-12 mx-auto"
         >
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             Manage your Booking
           </h1>
           <div className="w-20 h-1 bg-chart-5 mx-auto mb-6"></div>
+          <p>
+            Please note that changing your booking will reset the confirmation
+            state. You will receive a new confirmation message from me, should
+            their be enough space available.
+          </p>
         </motion.div>
         <section className="max-w-7xl mx-auto mb-4">
           <GuestForm data={booking} />
