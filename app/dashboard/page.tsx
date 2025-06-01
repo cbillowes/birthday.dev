@@ -11,6 +11,7 @@ import { GhostLinkButton } from "@/components/link-button";
 import { Loading } from "@/components/loading";
 import { getBooking } from "@/components/rsvp/service";
 import CountdownTimer from "@/components/countdown-timer";
+import { EventDetails } from "@/components/event-details";
 
 export default function DashboardPage() {
   const { user, loading } = useAuth();
@@ -161,8 +162,11 @@ export default function DashboardPage() {
             </Card>
           </div>
         </section>
-        <section id="details" className="max-w-7xl mx-auto">
+        <section id="party" className="max-w-7xl mx-auto">
           <PartyDetails />
+        </section>
+        <section id="event" className="max-w-7xl mx-auto mt-8">
+          <EventDetails />
         </section>
       </div>
     </FirebaseProvider>
