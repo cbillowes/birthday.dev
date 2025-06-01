@@ -3,21 +3,21 @@ import { db, stripUndefined } from "@/firebase/config";
 import { DecodedIdToken } from "firebase-admin/auth";
 
 export const saveBooking = async (
-  { guests }: BookingType,
+  { ref, guests }: BookingType,
   user: DecodedIdToken
 ) => {
-  const ref = user.uid;
-  const booking = (await getBooking(ref)) || {
+  const bookingRef = ref || user.uid;
+  const booking = (await getBooking(bookingRef)) || {
     createdBy: user.email || user.uid,
     createdAt: new Date().getTime(),
   };
   await db
     .collection("guests")
-    .doc(ref)
+    .doc(bookingRef)
     .set({
       ...booking,
       userId: user.uid,
-      ref,
+      ref: bookingRef,
       bookingName: guests[0].name.trim(),
       confirmedAt: null,
       guests: guests.map(
@@ -38,7 +38,7 @@ export const saveBooking = async (
 export const getBooking = async (userId: string) => {
   const snapshot = await db
     .collection("guests")
-    .where("userId", "==", userId)
+    .where("ref", "==", userId)
     .get();
   return snapshot.docs.map((doc) => doc.data() as BookingType)[0];
 };
@@ -54,6 +54,23 @@ export const getBookings = async (requesterUserId: string) => {
       .sort((a, b) => {
         return a.createdAt - b.createdAt;
       });
+  }
+  throw new Error("You do not have permission to view bookings.");
+};
+
+export const getBookingByRef = async (
+  requesterUserId: string,
+  bookingRef: string
+) => {
+  const authorized = (
+    await db.collection("roles").doc(requesterUserId).get()
+  ).data()?.admin;
+  if (authorized) {
+    const snapshot = await db
+      .collection("guests")
+      .where("ref", "==", bookingRef)
+      .get();
+    return snapshot.docs.map((doc) => doc.data() as BookingEntityType)[0];
   }
   throw new Error("You do not have permission to view bookings.");
 };
@@ -101,7 +118,7 @@ export const manageBooking = async (
     modifiedAt: new Date().getTime(),
     modifiedBy: user.email || user.uid,
   });
-  console.log(updatedBooking)
+  console.log(updatedBooking);
   await db
     .collection("guests")
     .doc(booking.ref)

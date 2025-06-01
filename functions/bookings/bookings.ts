@@ -1,4 +1,4 @@
-import { getBookings } from "@/components/rsvp/db";
+import { getBookings, getBookingByRef } from "@/components/rsvp/db";
 import { auth, db } from "@/firebase/config";
 import { Handler } from "@netlify/functions";
 
@@ -22,11 +22,20 @@ const handler: Handler = async (event, context) => {
     const authorized = (await db.collection("roles").doc(user.uid).get()).data()
       ?.admin;
     if (authorized) {
-      const bookings = await getBookings(user.uid);
-      return {
-        statusCode: 200,
-        body: JSON.stringify(bookings),
-      };
+      const bookingRef = event.queryStringParameters?.ref;
+      if (bookingRef) {
+        const booking = await getBookingByRef(user.uid, bookingRef);
+        return {
+          statusCode: 200,
+          body: JSON.stringify(booking),
+        };
+      } else {
+        const bookings = await getBookings(user.uid);
+        return {
+          statusCode: 200,
+          body: JSON.stringify(bookings),
+        };
+      }
     } else {
       return {
         statusCode: 403,

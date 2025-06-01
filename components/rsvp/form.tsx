@@ -12,7 +12,8 @@ import { ErrorToast } from "@/components/error-toast";
 
 const GuestForm: React.FC<{
   data?: BookingType;
-}> = ({ data }) => {
+  redirectTo?: string;
+}> = ({ data, redirectTo = "/thank-you" }) => {
   const [mounted, setMounted] = useState(false);
   const { user } = useAuth();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -59,13 +60,14 @@ const GuestForm: React.FC<{
     try {
       const saved = await saveBooking(user, data);
       if (saved) {
-        router.push("/thank-you");
+        router.push(redirectTo);
       } else {
         setErrorMessage(
           "Your booking could not be saved. Please try again later."
         );
       }
     } catch (error) {
+      console.error("Error saving booking:", error);
       setErrorMessage(
         "An error occurred while saving your booking. Please try again later."
       );

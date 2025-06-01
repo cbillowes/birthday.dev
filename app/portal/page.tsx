@@ -211,7 +211,7 @@ export default function PortalPage() {
                         )}
                       </td>
                       <td className="px-4 py-2 whitespace-nowrap">
-                        {guest.name}
+                        <a href={`/portal/${booking.ref}`} className="underline">{guest.name}</a>
                       </td>
                       <td className="px-4 py-2 whitespace-nowrap">
                         {guest.phone}

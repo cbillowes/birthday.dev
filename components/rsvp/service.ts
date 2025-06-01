@@ -1,7 +1,10 @@
 import { User } from "firebase/auth";
 import { BookingType, BookingEntityType } from "@/components/rsvp/schema";
 
-export const saveBooking = async (user: User, data: BookingType) => {
+export const saveBooking = async (
+  user: User,
+  booking: BookingType
+) => {
   const token = await user.getIdToken();
   const response = await fetch("/.netlify/functions/rsvp", {
     method: "POST",
@@ -9,7 +12,7 @@ export const saveBooking = async (user: User, data: BookingType) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(booking),
   });
   return response.ok;
 };
@@ -80,4 +83,21 @@ export const addNotesToBooking = async (
     body: JSON.stringify({ ref: bookingRef, notes }),
   });
   return response.ok;
+};
+
+export const getBookingByRef = async (user: User, bookingRef: string) => {
+  const token = await user.getIdToken();
+  const response = await fetch(
+    `/.netlify/functions/bookings?ref=${bookingRef}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch booking by reference.");
+  }
+  return response.json() as Promise<BookingType>;
 };
