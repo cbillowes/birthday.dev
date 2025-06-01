@@ -4,17 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Music,
-  Gift,
-  Code,
-  Database,
-  QrCode,
-  ChevronsLeftRightEllipsis,
-  Share2,
-  Wine,
-} from "lucide-react";
+import { Gift, Code, Database, QrCode } from "lucide-react";
 import { motion } from "framer-motion";
 import CountdownTimer from "@/components/countdown-timer";
 import GallerySection from "@/components/gallery-section";
@@ -149,10 +139,10 @@ export default function Home() {
                         Step 2: Book your Spot
                       </h3>
                       <p className="text-white mb-2">
-                        Book for you and on behalf of others! Space is limited
-                        but I will try to accommodate everyone. Once you book
-                        your spot, I will let you know if you are in within a
-                        few days.
+                        Book for you and on behalf of others (max 4 per
+                        booking). Space is limited but I will try to accommodate
+                        everyone. Once you book your spot, I will let you know
+                        if you are in within a few days.
                       </p>
                     </div>
                   </CardContent>
@@ -161,24 +151,14 @@ export default function Home() {
                   <CardContent className="pt-6">
                     <div className="flex flex-col items-center text-center">
                       <div className="mb-4 p-3 rounded-full bg-black/40">
-                        <Share2 className="h-8 w-8 text-white" />
+                        <Gift className="h-8 w-8 text-white" />
                       </div>
-                      <h3 className="text-xl font-bold mb-2">Share</h3>
+                      <h3 className="text-xl font-bold mb-2">Step 3: Pitch</h3>
                       <p className="text-white">
-                        Share this website with your friends and family! You can
-                        also send me photos, or messages that you would like me
-                        to publish on the website.
+                        There is no preparation needed. Once your booking is
+                        confirmed and the time has come, just rock up with your
+                        biggest smile and enjoy the celebration!
                       </p>
-                      <GhostLinkButton
-                        to={`https://wa.me/?text=${encodeURIComponent(
-                          "Join me for Clarice's 40th birthday celebration! Register and book your spot at https://rsvp.clarice.bouwer.dev"
-                        )}`}
-                        size="lg"
-                        className="mt-4 hover:bg-white/40 border-white/60 bg-white/20 text-white"
-                        target="_blank"
-                      >
-                        Share on WhatsApp
-                      </GhostLinkButton>
                     </div>
                   </CardContent>
                 </Card>
