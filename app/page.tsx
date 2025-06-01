@@ -233,13 +233,24 @@ export default function Home() {
               What are you waiting for? Don’t miss this special celebration! Let
               me know if you’ll be joining us.
             </p>
-            <Button
-              asChild
-              size="lg"
-              className="bg-chart-5 hover:bg-chart-5/90 text-white"
-            >
-              <Link href="/register">Register Now</Link>
-            </Button>
+            {user && (
+              <Button
+                asChild
+                size="lg"
+                className="bg-chart-5 hover:bg-chart-5/90 text-white"
+              >
+                <Link href="/rsvp">Book your Spot</Link>
+              </Button>
+            )}
+            {!user && (
+              <Button
+                asChild
+                size="lg"
+                className="bg-chart-5 hover:bg-chart-5/90 text-white"
+              >
+                <Link href="/register">Register Now</Link>
+              </Button>
+            )}
           </motion.div>
         </div>
       </section>
