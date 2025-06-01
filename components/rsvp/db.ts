@@ -86,6 +86,7 @@ export const confirmBooking = async (
     .doc(bookingRef)
     .set({
       ...booking,
+      cancelled: false,
       confirmedAt: new Date().getTime(),
       confirmedBy: user.email || user.uid,
       modifiedAt: new Date().getTime(),
@@ -103,6 +104,7 @@ export const resetBooking = async (
     .doc(bookingRef)
     .set({
       ...booking,
+      cancelled: false,
       confirmedAt: null,
       confirmedBy: null,
       modifiedAt: new Date().getTime(),
