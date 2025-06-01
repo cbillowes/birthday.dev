@@ -27,7 +27,11 @@ export const bookingEntitySchema = z.object({
   guests: z.array(guestSchema),
   userId: z.string(),
   createdAt: z.number(),
+  createdBy: z.string().optional(),
   modifiedAt: z.number().optional(),
+  modifiedBy: z.string().optional(),
+  confirmedAt: z.number().optional(),
+  notes: z.string().optional(),
 });
 
 export type BookingEntityType = z.infer<typeof bookingEntitySchema>;
