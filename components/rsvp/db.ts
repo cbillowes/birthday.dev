@@ -1,9 +1,14 @@
 import { BookingType, BookingEntityType } from "@/components/rsvp/schema";
 import { db } from "@/firebase/config";
+import { DecodedIdToken } from "firebase-admin/auth";
 
-export const saveBooking = async (userId: string, { guests }: BookingType) => {
-  const ref = userId;
-  const booking = (await getRsvp(userId)) || {
+export const saveBooking = async (
+  { guests }: BookingType,
+  user: DecodedIdToken
+) => {
+  const ref = user.uid;
+  const booking = (await getBooking(ref)) || {
+    createdBy: user.email || user.uid,
     createdAt: new Date().getTime(),
   };
   await db
@@ -11,9 +16,10 @@ export const saveBooking = async (userId: string, { guests }: BookingType) => {
     .doc(ref)
     .set({
       ...booking,
-      userId,
-      bookingName: guests[0].name.trim(),
+      userId: user.uid,
       ref,
+      bookingName: guests[0].name.trim(),
+      confirmedAt: null,
       guests: guests.map(
         ({ name, phone, consentForWhatsApp, requests, expectedTime }) => ({
           name: name.trim(),
@@ -21,13 +27,15 @@ export const saveBooking = async (userId: string, { guests }: BookingType) => {
           consentForWhatsApp,
           requests: requests ? requests.trim() : "",
           expectedTime,
+          confirmed: false,
         })
       ),
       modifiedAt: new Date().getTime(),
+      modifiedBy: user.email || user.uid,
     });
 };
 
-export const getRsvp = async (userId: string) => {
+export const getBooking = async (userId: string) => {
   const snapshot = await db
     .collection("guests")
     .where("userId", "==", userId)
@@ -48,4 +56,55 @@ export const getBookings = async (requesterUserId: string) => {
       });
   }
   throw new Error("You do not have permission to view bookings.");
+};
+
+export const confirmBooking = async (
+  bookingRef: string,
+  user: DecodedIdToken
+) => {
+  const booking = await getBooking(bookingRef);
+  await db
+    .collection("guests")
+    .doc(bookingRef)
+    .set({
+      ...booking,
+      confirmedAt: new Date().getTime(),
+      confirmedBy: user.email || user.uid,
+      modifiedAt: new Date().getTime(),
+      modifiedBy: user.email || user.uid,
+    });
+};
+
+export const resetBooking = async (
+  bookingRef: string,
+  user: DecodedIdToken
+) => {
+  const booking = await getBooking(bookingRef);
+  await db
+    .collection("guests")
+    .doc(bookingRef)
+    .set({
+      ...booking,
+      confirmedAt: null,
+      confirmedBy: null,
+      modifiedAt: new Date().getTime(),
+      modifiedBy: user.email || user.uid,
+    });
+};
+
+export const saveNotes = async (
+  bookingRef: string,
+  notes: string,
+  user: DecodedIdToken
+) => {
+  const booking = await getBooking(bookingRef);
+  await db
+    .collection("guests")
+    .doc(bookingRef)
+    .set({
+      ...booking,
+      notes: notes.trim(),
+      modifiedAt: new Date().getTime(),
+      modifiedBy: user.email || user.uid,
+    });
 };

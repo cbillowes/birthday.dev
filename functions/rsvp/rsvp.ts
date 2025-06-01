@@ -18,7 +18,7 @@ const handler: Handler = async (event, context) => {
         body: JSON.stringify({ message: "Could not authenticate user." }),
       };
     }
-    await saveBooking(user.uid, JSON.parse(event.body));
+    await saveBooking(JSON.parse(event.body), user);
     return {
       statusCode: 200,
     };

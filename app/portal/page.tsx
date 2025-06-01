@@ -2,17 +2,29 @@
 import { ErrorToast } from "@/components/error-toast";
 import { Loading } from "@/components/loading";
 import { BookingEntityType } from "@/components/rsvp/schema";
-import { getBookings } from "@/components/rsvp/service";
+import {
+  confirmBooking,
+  getBookings,
+  resetBooking,
+} from "@/components/rsvp/service";
 import { useAuth } from "@/hooks/use-auth";
+import { cn } from "@/lib/utils";
 import { FirebaseProvider } from "@/providers/firebase";
 import { motion } from "framer-motion";
+import {
+  MessageSquareDiff,
+  TicketCheckIcon,
+  TicketMinusIcon,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function PortalPage() {
   const { user, loading } = useAuth();
+  const [refresh, setRefresh] = useState(false);
   const [bookings, setBookings] = useState<BookingEntityType[]>([]);
   const [totalGuests, setTotalGuests] = useState(0);
+  const [totalConfirmedGuests, setTotalConfirmedGuests] = useState(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const router = useRouter();
 
@@ -31,13 +43,21 @@ export default function PortalPage() {
               return acc + (booking.guests?.length || 0);
             }, 0)
           );
+          setTotalConfirmedGuests(
+            bookings.reduce((acc, booking) => {
+              return (
+                acc + (booking.confirmedAt !== null ? booking.guests.length : 0)
+              );
+            }, 0)
+          );
+          setRefresh(false);
         } catch (error) {
           router.push("/dashboard");
         }
       }
     };
     getAllBookings();
-  }, [user, loading, router]);
+  }, [refresh, user, loading, router]);
 
   if (loading) return <Loading />;
 
@@ -52,9 +72,24 @@ export default function PortalPage() {
         >
           <h1 className="text-3xl md:text-4xl font-bold mb-4"> Bookings</h1>
           <div className="w-20 h-1 bg-chart-5 mx-auto mb-6"></div>
-          <p>
-            {bookings.length} booking(s) and {totalGuests} guest(s) in total.
-          </p>
+          <table className="mx-auto">
+            <tbody>
+              <tr>
+                <td className="px-4 py-2">Bookings:</td>
+                <td className="px-4 py-2 text-white font-bold">
+                  {bookings.length}
+                </td>
+                <td className="px-4 py-2">Confirmed Guests:</td>
+                <td className="px-4 py-2 text-green-400 font-bold">
+                  {totalConfirmedGuests}
+                </td>
+                <td className="px-4 py-2">Unconfirmed Guests:</td>
+                <td className="px-4 py-2 text-red-400 font-bold">
+                  {totalGuests - totalConfirmedGuests}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </motion.div>
         <section className="max-w-7xl mx-auto mb-4 overflow-scroll">
           <table className="w-full text-left border-collapse bg-black/20 border-white/20 border">
@@ -64,115 +99,135 @@ export default function PortalPage() {
                 <th className="px-4 py-2 text-white/70">Name</th>
                 <th className="px-4 py-2 text-white/70">Number</th>
                 <th className="px-4 py-2 text-white/70">WhatsApp?</th>
-                <th className="px-4 py-2 text-white/70 whitespace-nowrap">Est. Time</th>
+                <th className="px-4 py-2 text-white/70 whitespace-nowrap">
+                  Est. Time
+                </th>
                 <th className="px-4 py-2 text-white/70">Comments</th>
+                <th className="px-4 py-2 text-white/70">Notes</th>
                 <th className="px-4 py-2 text-white/70">Created</th>
                 <th className="px-4 py-2 text-white/70">Modified</th>
+                <th className="px-4 py-2 text-white/70">Confirmed</th>
               </tr>
             </thead>
             <tbody>
-              {bookings.map(({ guests, createdAt, modifiedAt }, i) => {
-                return guests?.map((guest, j) => (
-                  <tr
-                    key={`summary-row-${i}-${j}`}
-                    className="border-t border-white/20"
-                  >
-                    <td className="px-4 py-2 text-white/70">
-                      {i + 1}.{j + 1}
-                    </td>
-                    <td className="px-4 py-2 text-white/90 whitespace-nowrap">{guest.name}</td>
-                    <td className="px-4 py-2 text-white/90 whitespace-nowrap">{guest.phone}</td>
-                    <td className="px-4 py-2 text-white/90">
-                      {guest.consentForWhatsApp ? "Yes" : "No"}
-                    </td>
-                    <td className="px-4 py-2 text-white/90">
-                      {guest.expectedTime}
-                    </td>
-                    <td className="px-4 py-2 text-white/90">
-                      {guest.requests || "No comments"}
-                    </td>
-                    <td className="px-4 py-2 text-white/90 whitespace-nowrap">
-                      {new Date(createdAt).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </td>
-                    <td className="px-4 py-2 text-white/90 whitespace-nowrap">
-                      {modifiedAt
-                        ? new Date(modifiedAt).toLocaleDateString("en-US", {
-                            year: "numeric",
-                            month: "short",
-                            day: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          })
-                        : "N/A"}
-                    </td>
-                  </tr>
-                ));
-              })}
+              {bookings.map(
+                (
+                  {
+                    ref,
+                    guests,
+                    notes,
+                    createdAt,
+                    createdBy,
+                    modifiedAt,
+                    modifiedBy,
+                    confirmedAt,
+                    confirmedBy,
+                  },
+                  i
+                ) => {
+                  return guests?.map((guest, j) => (
+                    <tr
+                      key={`summary-row-${i}-${j}`}
+                      className={cn(
+                        "border-t border-white/20",
+                        confirmedAt ? "text-green-400" : "text-white/90"
+                      )}
+                    >
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {i + 1}.{j + 1}{" "}
+                        {user && confirmedAt && (
+                          <span
+                            onClick={() => {
+                              resetBooking(user, ref);
+                              setRefresh(true);
+                            }}
+                            className="cursor-pointer"
+                          >
+                            <TicketMinusIcon />
+                          </span>
+                        )}
+                        {user && !confirmedAt && (
+                          <span
+                            onClick={() => {
+                              confirmBooking(user, ref);
+                              setRefresh(true);
+                            }}
+                            className="cursor-pointer"
+                          >
+                            <TicketCheckIcon />
+                          </span>
+                        )}
+                        {/* {notes && (
+                          <span
+                            onClick={() => {
+                              confirmBooking(user, ref);
+                              setRefresh(true);
+                            }}
+                            className="cursor-pointer"
+                          >
+                            <MessageSquareDiff />
+                          </span>
+                        )} */}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {guest.name}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {guest.phone}
+                      </td>
+                      <td className="px-4 py-2">
+                        {guest.consentForWhatsApp ? "Yes" : "No"}
+                      </td>
+                      <td className="px-4 py-2">{guest.expectedTime}</td>
+                      <td className="px-4 py-2">
+                        {guest.requests || "No comments"}
+                      </td>
+                      <td className="px-4 py-2">
+                        {(j === 0 && notes) || "No notes"}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {new Date(createdAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                        <br />
+                        {createdBy}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {modifiedAt
+                          ? new Date(modifiedAt).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                          : "N/A"}
+                        <br />
+                        {modifiedBy}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {confirmedAt
+                          ? new Date(confirmedAt).toLocaleDateString("en-US", {
+                              year: "numeric",
+                              month: "short",
+                              day: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })
+                          : "N/A"}
+                        <br />
+                        {confirmedBy}
+                      </td>
+                    </tr>
+                  ));
+                }
+              )}
             </tbody>
           </table>
-          {/* {bookings.map(({ guests, createdAt }, index) => (
-            <div key={bookingName} className="mb-2">
-              <h2 className="text-lg font-bold flex flex-col md:flex-row justify-between bg-black/50 px-4 py-2 border border-white/20">
-                <span>
-                  #{index + 1}: {bookingName}
-                </span>
-                <span>
-                  {new Date(createdAt).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </span>
-              </h2>
-              <div className="overflow-scroll">
-                <table className="w-full text-left border-collapse bg-black/20 border-white/20 border border-t-0">
-                  <thead>
-                    <tr className="bg-black/50">
-                      <th className="px-4 py-2 text-white/70">Name</th>
-                      <th className="px-4 py-2 text-white/70">Number</th>
-                      <th className="px-4 py-2 text-white/70">
-                        WhatsApp Group?
-                      </th>
-                      <th className="px-4 py-2 text-white/70">Est. Time</th>
-                      <th className="px-4 py-2 text-white/70">Comments</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {guests?.map((guest, index) => (
-                      <tr
-                        key={`summary-row-${index}`}
-                        className="border-t border-white/20"
-                      >
-                        <td className="px-4 py-2 text-white/90">
-                          {guest.name}
-                        </td>
-                        <td className="px-4 py-2 text-white/90">
-                          {guest.phone}
-                        </td>
-                        <td className="px-4 py-2 text-white/90">
-                          {guest.consentForWhatsApp ? "Yes" : "No"}
-                        </td>
-                        <td className="px-4 py-2 text-white/90">
-                          {guest.expectedTime}
-                        </td>
-                        <td className="px-4 py-2 text-white/90">
-                          {guest.requests || "No comments"}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          ))} */}
         </section>
       </div>
       <ErrorToast

@@ -31,6 +31,7 @@ export const bookingEntitySchema = z.object({
   modifiedAt: z.number().optional(),
   modifiedBy: z.string().optional(),
   confirmedAt: z.number().optional(),
+  confirmedBy: z.string().optional(),
   notes: z.string().optional(),
 });
 
