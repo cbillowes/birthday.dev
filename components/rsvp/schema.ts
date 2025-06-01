@@ -15,7 +15,7 @@ export const guestSchema = z.object({
 export type GuestType = z.infer<typeof guestSchema>;
 
 export const bookingTypeSchema = z.object({
-  ref: z.string(),
+  ref: z.string().optional(),
   guests: z
     .array(guestSchema)
     .min(1, { message: "At least one guest is required for your booking." }),
