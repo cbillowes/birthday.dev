@@ -1,5 +1,5 @@
 import { BookingType, BookingEntityType } from "@/components/rsvp/schema";
-import { db } from "@/firebase/config";
+import { db, stripUndefined } from "@/firebase/config";
 import { DecodedIdToken } from "firebase-admin/auth";
 
 export const saveBooking = async (
@@ -92,19 +92,18 @@ export const resetBooking = async (
     });
 };
 
-export const saveNotes = async (
-  bookingRef: string,
-  notes: string,
+export const manageBooking = async (
+  booking: BookingEntityType,
   user: DecodedIdToken
 ) => {
-  const booking = await getBooking(bookingRef);
+  const updatedBooking = stripUndefined({
+    ...booking,
+    modifiedAt: new Date().getTime(),
+    modifiedBy: user.email || user.uid,
+  });
+  console.log(updatedBooking)
   await db
     .collection("guests")
-    .doc(bookingRef)
-    .set({
-      ...booking,
-      notes: notes.trim(),
-      modifiedAt: new Date().getTime(),
-      modifiedBy: user.email || user.uid,
-    });
+    .doc(booking.ref)
+    .set(updatedBooking, { merge: true });
 };

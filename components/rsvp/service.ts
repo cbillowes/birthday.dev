@@ -65,3 +65,19 @@ export const resetBooking = async (user: User, bookingRef: string) => {
   });
   return response.ok;
 };
+
+export const addNotesToBooking = async (
+  user: User,
+  bookingRef: string,
+  notes: string
+) => {
+  const token = await user.getIdToken();
+  const response = await fetch(`/.netlify/functions/manage`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ ref: bookingRef, notes }),
+  });
+  return response.ok;
+};

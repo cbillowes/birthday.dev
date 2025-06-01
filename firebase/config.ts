@@ -22,5 +22,13 @@ initializeApp({
   }),
 });
 
+export function stripUndefined(
+  obj: Record<string, unknown>
+): Record<string, unknown> {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_, v]) => v !== undefined)
+  );
+}
+
 export const db = getFirestore();
 export const auth = getAuth();
